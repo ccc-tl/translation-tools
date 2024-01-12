@@ -1,0 +1,87 @@
+buildscript {
+  ext.kotlinVersion = '1.9.20'
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  }
+}
+
+plugins {
+  id "org.jlleitschuh.gradle.ktlint" version "10.1.0"
+}
+
+group 'tl'
+version = '1.0.0-SNAPSHOT'
+
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'kotlin'
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+  }
+
+  kotlin {
+    jvmToolchain(11)
+  }
+}
+
+subprojects {
+  apply plugin: 'org.jlleitschuh.gradle.ktlint'
+
+  test {
+    useJUnitPlatform()
+  }
+}
+
+project(':common') {
+  dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt"
+    api "com.github.kotcrab:kmipsx:3a6ef494a4"
+    api "com.github.kotcrab:kio:9111dcc"
+  }
+}
+
+project(':common-cli') {
+  dependencies {
+    api project(":common")
+  }
+}
+
+project(':extra') {
+  dependencies {
+    api project(":extra-common")
+  }
+}
+
+project(':extra-ccc') {
+  dependencies {
+    api project(":extra")
+  }
+}
+
+project(':extra-common') {
+  dependencies {
+    api project(":common")
+  }
+}
+
+project(':extra-tools') {
+  apply plugin: 'application'
+
+  application {
+    mainClass = 'tl.extra.cli.CliKt'
+  }
+
+  dependencies {
+    api project(":extra-common")
+    implementation("com.github.ajalt.clikt:clikt:3.4.2")
+  }
+}

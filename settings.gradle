@@ -1,0 +1,7 @@
+rootProject.name = 'translation-tools'
+include ':common'
+include ':common-cli'
+include ':extra'
+include ':extra-ccc'
+include ':extra-common'
+include ':extra-tools'
