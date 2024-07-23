@@ -15,5 +15,6 @@ class ExtractPackageCommand : CliktCommand(name = "package", help = "Batch extra
 
   override fun run() {
     PackageExtractor(source, dest)
+    println("Done")
   }
 }

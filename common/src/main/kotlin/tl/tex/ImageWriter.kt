@@ -13,16 +13,16 @@ class ImageWriter(
 ) {
   constructor(width: Int, height: Int) : this(width, height, false, -1)
 
-  private val img = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+  val image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 
   private var xPos = 0
   private var yPos = 0
 
   fun writePixel(argbColor: Int) {
     if (removeAlphaMask && argbColor == argbAlphaMask) {
-      img.setRGB(xPos, yPos, 0)
+      image.setRGB(xPos, yPos, 0)
     } else {
-      img.setRGB(xPos, yPos, argbColor)
+      image.setRGB(xPos, yPos, argbColor)
     }
     xPos++
     if (xPos >= width) {
@@ -37,9 +37,9 @@ class ImageWriter(
 
   fun writeToPng(file: File, outWidth: Int = width, outHeight: Int = height) {
     val outImg = if (outWidth == width && outHeight == height) {
-      img
+      image
     } else {
-      img.getSubimage(0, 0, min(img.width, outWidth), min(img.height, outHeight))
+      image.getSubimage(0, 0, min(image.width, outWidth), min(image.height, outHeight))
     }
     ImageIO.write(outImg, "PNG", file)
   }

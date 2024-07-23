@@ -16,7 +16,7 @@ class CccTranslation(
   overrides: Map<Int, String> = mapOf(),
   private val checkForAmbiguous: Boolean = false,
   private val failOnLiteralNewLine: Boolean = false,
-  safetyChecks: Boolean = true
+  safetyChecks: Boolean = true,
 ) : Translation(
   jpFile, enFile, notesFile,
   if (stripJpAndNotesNewLine) setOf(
@@ -32,13 +32,15 @@ class CccTranslation(
       checkInvalidRubyOffsets()
       checkForInvalidCharacters()
       checkForLiteralNewLine()
+    } else {
+      println("TL WARN: Safety checks are disabled")
     }
   }
 
   private fun checkRubyStartedButInvalid() {
     val rubsRegex = "#RUBS".toRegex()
     repeat(enTexts.size) { idx ->
-      val tl = getTranslation(idx)
+      val tl = getTranslation(idx, allowBlank = true)
       val rubsInTl = rubsRegex.find(tl)
         ?.groups
         ?.filterNotNull()

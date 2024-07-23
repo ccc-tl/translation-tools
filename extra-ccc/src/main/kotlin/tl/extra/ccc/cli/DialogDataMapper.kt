@@ -24,7 +24,7 @@ fun main() {
   DialogueDataMapper(
     cccUnpack,
     cccUnpack.child("field_new"),
-    parseCccSoundTable(cccUnpack.child("BOOT.BIN")),
+    parseCccSoundTable(cccToolkit.child("src/NPJH50505.BIN")),
     cccToolkit.child("src/translation/dat/script-japanese.txt")
   ).processTo(baseOut, createUpdatedNotes = false, createAudioAndPortraitText = true)
   println("Done")

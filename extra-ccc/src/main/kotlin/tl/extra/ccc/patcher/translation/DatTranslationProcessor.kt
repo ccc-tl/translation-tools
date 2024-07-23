@@ -162,6 +162,9 @@ class DatTranslationProcessor(
   }
 
   private fun checkSgTexts(jpText: String, enText: String) {
+    if (jpText == enText) {
+      return
+    }
     val jpHasSg = jpText.contains("#C\\d{8,9}ＳＧ".toRegex())
     val enHasSg = enText.contains("#C\\d{8,9}SG".toRegex())
     val enHash = sdbmHash(enText.toByteArray())

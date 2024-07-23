@@ -7,6 +7,7 @@ import kio.util.readJson
 import kio.util.toWHex
 import kmipsx.elf.patchElf
 import tl.extra.ccc.cccCpkUnpack
+import tl.extra.ccc.cccDnsUnpack
 import tl.extra.ccc.cccToolkit
 import tl.extra.ccc.cccUnpack
 import tl.extra.ccc.patcher.eboot.CccAsmPatcher
@@ -55,12 +56,13 @@ fun repackageCcc(
   downloadTranslations: Boolean = publicBuild,
   warningCollector: WarningCollector = WarningCollector(),
 ): PatchBuildResult {
-  return CccRepackager(cccToolkit, cccCpkUnpack, cccUnpack, pspSdkHome, publicBuild, downloadTranslations, warningCollector)
+  return CccRepackager(cccToolkit, cccDnsUnpack, cccCpkUnpack, cccUnpack, pspSdkHome, publicBuild, downloadTranslations, warningCollector)
     .buildAll()
 }
 
 class CccRepackager(
   private val projectDir: File,
+  cccDnsExtract: File,
   private val cccCpkExtract: File,
   private val cccPakExtract: File,
   pspSdkDir: File,
@@ -73,7 +75,7 @@ class CccRepackager(
   private val buildDir = projectDir.child("build")
   private val toolsDir = projectDir.child("tools")
 
-  private val srcCpkFile = srcDir.child("GAME.cpk")
+  private val srcCpkFile = cccDnsExtract.child("GAME.cpk")
   private val srcDecryptedEboot = srcDir.child("NPJH50505.BIN")
   private val customPakFilesDir = srcDir.child("custom-pak-files")
   private val customCpkFilesDir = srcDir.child("custom-cpk-files")
@@ -307,7 +309,7 @@ class CccRepackager(
     cccPatcher.assemble(
       PakFile(cccCpkExtract.child("pack/PRELOAD.pak")), pakReplacements,
       translations.items.remapper01, translations.items.remapper04,
-      srcDir.child("credits.txt").readText()
+      srcDir.child("credits.txt").takeIf { it.exists() }?.readText() ?: ""
     )
   }
 
@@ -409,7 +411,8 @@ _L 0x7$patchConfigByte0 0x00000008
         fineTool, PatchFsCreateMode.CCC,
         stockSrcDir.child("NPJH50505.BIN"), stockSrcDir.child("NPJH50505-PSN.BIN"), outEbootFile,
         cccCpkExtract, cpkReplacements, cpkPatchedFiles, nameReplacements,
-        stockSrcDir, isoBuildDir
+        stockSrcDir, isoBuildDir,
+        warningCollector::warn
       ).createTo(patchFsDir, decmpCacheDir, patchFsOut, pmfPatchFsOut)
     } else {
       patchFsOut.delete()

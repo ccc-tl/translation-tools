@@ -4,6 +4,8 @@ class TextMeasure(
   val asciiSpacing: Int,
   private val warn: (String) -> Unit,
 ) {
+  private val unknownChars = mutableSetOf<Char>()
+
   fun measureInGameText(line: String): Int {
     return line
       .sumOf {
@@ -19,7 +21,10 @@ class TextMeasure(
             0xF
           }
           else -> {
-            warn("Text measure: Unknown character width: $it, using default (in '$line')")
+            if (it !in unknownChars) {
+              unknownChars.add(it)
+              warn("Text measure: Unknown character width: $it, using default (in '$line')")
+            }
             0xF
           }
         }

@@ -4,7 +4,9 @@ import kio.KioInputStream
 import kio.util.WINDOWS_932
 import kio.util.appendLine
 import kio.util.child
+import kio.util.readJson
 import kio.util.writeJson
+import tl.extra.ccc.cccToolkit
 import tl.extra.ccc.cccUnpack
 import tl.extra.ccc.file.InfoMatrixDBinFile
 import tl.extra.ccc.file.InfoMatrixTBinFile
@@ -25,14 +27,20 @@ import java.nio.charset.Charset
 fun main() {
   CccScriptDumper(
     cccUnpack,
-    cccUnpack.child("BOOT.BIN"),
+    cccToolkit.child("src/NPJH50505.BIN"),
+    cccToolkit.child("src/translation/eboot/pointers.json"),
     fateOutput.child("ccc-script-v3")
   )
   println("Done")
 }
 
 @Suppress("SameParameterValue")
-class CccScriptDumper(private val srcDir: File, ebootFile: File, private val outDir: File) {
+class CccScriptDumper(
+  private val srcDir: File,
+  private val ebootFile: File,
+  private val ebootPointersFile: File,
+  private val outDir: File
+) {
   private val soundTable = parseCccSoundTable(ebootFile)
   private val entries = mutableListOf<Entry>()
   private val tocEntries = mutableListOf<String>()
@@ -40,9 +48,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   init {
     outDir.mkdir()
     translationUnit("eboot") {
-      addTocEntry("EBOOT")
-      File(srcDir, "EBOOT.txt").readLines()
-        .forEach { entries.add(Entry(it, "EBOOT")) }
+      processEbootFile()
     }
     translationUnit("items") {
       processItemParam01BinFile("cmn/item_param_01.bin")
@@ -194,8 +200,20 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
     }
   }
 
+  private fun processEbootFile() {
+    println("Processing EBOOT")
+    addTocEntry("EBOOT")
+    with(KioInputStream(ebootFile)) {
+      ebootPointersFile.readJson<List<EbootPointerEntry>>().forEach { entry ->
+        setPos(entry.p)
+        entries.add(Entry(String(readBytes(entry.s), Charsets.WINDOWS_932), "EBOOT"))
+      }
+      close()
+    }
+  }
+
   private fun processChrDatFile(jsonOut: File, path: String, startAddr: Int, textCount: Int) {
-    println("Process $path")
+    println("Processing $path")
     val debug = false
     addTocEntry(path)
     val file = File(srcDir, path)
@@ -306,7 +324,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processIndexedTextBinFile(path: String, charset: Charset = Charsets.WINDOWS_932) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(srcDir, path)
     IndexedTextBinFile(file, charset).entries.forEach {
@@ -315,7 +333,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processSgBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(srcDir, path)
     with(KioInputStream(file)) {
@@ -330,7 +348,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processSgNamedBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     with(KioInputStream(file)) {
@@ -346,7 +364,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processSgTextBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     with(KioInputStream(file)) {
@@ -361,7 +379,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processDungeonSelectBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     with(KioInputStream(file)) {
@@ -378,7 +396,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processFixedSizeTextBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     FixedSizeTextBinFile(file).entries.forEach {
@@ -387,7 +405,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processItemParam01BinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     ItemParam01BinFile(file).entries.forEach {
@@ -399,7 +417,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processItemParam04BinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     ItemParam04BinFile(file).entries.forEach {
@@ -410,7 +428,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processChaDataTblFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     SjisFile(file).entries.forEach {
@@ -423,7 +441,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processInfoMatrixDBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     InfoMatrixDBinFile(file).entries.forEach {
@@ -432,7 +450,7 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private fun processInfoMatrixTBinFile(path: String) {
-    println("Process $path")
+    println("Processing $path")
     addTocEntry(path)
     val file = File(this.srcDir, path)
     InfoMatrixTBinFile(file).entries.forEach {
@@ -471,4 +489,6 @@ class CccScriptDumper(private val srcDir: File, ebootFile: File, private val out
   }
 
   private class Entry(val jp: String, val note: String, val portrait: String = "", val audio: String = "")
+
+  private data class EbootPointerEntry(val p: Int, val s: Int)
 }

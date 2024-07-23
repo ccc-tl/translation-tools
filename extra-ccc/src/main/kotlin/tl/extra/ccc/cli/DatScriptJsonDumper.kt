@@ -17,17 +17,25 @@ import java.io.File
 fun main() {
   val scriptOutDir = File(fateOutput, "ccc_script_dat_v2").apply { mkdir() }
   val baseDir = cccUnpack
+  DatScriptJsonDumper(baseDir, scriptOutDir).dump()
+  println("Done")
+}
 
-  walkDir(baseDir.child("field_new")) { scriptFile ->
-    if (scriptFile.name == "0000.dat" || scriptFile.name == "1000.dat") {
-      val relPath = scriptFile.relativizePath(baseDir)
-      println("Processing $relPath...")
-      val flatRelPath = relPath.replace("/", "$")
-      val outFile = scriptOutDir.child("$flatRelPath.json")
-      ScriptDatFileV2(scriptFile, outFile)
+class DatScriptJsonDumper(
+  private val inputDir: File,
+  private val outputDir: File,
+) {
+  fun dump() {
+    walkDir(inputDir.child("field_new")) { scriptFile ->
+      if (scriptFile.name == "0000.dat" || scriptFile.name == "1000.dat") {
+        val relPath = scriptFile.relativizePath(inputDir)
+        println("Processing $relPath...")
+        val flatRelPath = relPath.replace("/", "$")
+        val outFile = outputDir.child("$flatRelPath.json")
+        ScriptDatFileV2(scriptFile, outFile)
+      }
     }
   }
-  println("Done")
 }
 
 private class ScriptDatFileV2(

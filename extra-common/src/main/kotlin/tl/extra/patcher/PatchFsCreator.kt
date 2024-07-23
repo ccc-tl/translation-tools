@@ -27,6 +27,7 @@ class PatchFsCreator(
   private val nameReplacements: NameReplacements?,
   private val stockSrcDir: File,
   private val cccIsoBuildDir: File? = null,
+  private val warn: (String) -> Unit,
 ) {
   companion object {
     const val MODULE_VERSION = "fate-v3"
@@ -73,7 +74,11 @@ class PatchFsCreator(
       PatchTask("opnssmp-psn.patch", "patch://OPNSSMP-PSN.BIN", stockSrcDir.child("OPNSSMP-PSN.BIN"), stockSrcDir.child("OPNSSMP.BIN")),
       PatchTask("param-psn.patch", "patch://PARAM-PSN.SFO", stockSrcDir.child("PARAM-PSN.SFO"), stockSrcDir.child("PARAM.SFO")),
     ).forEach {
-      println("Creating patch for ${it.dest.name}...")
+      println("Creating patch for ${it.fsPath}...")
+      if (!it.orig.exists() || !it.dest.exists()) {
+        warn("Can't create patch for ${it.fsPath} because source or destination file is missing")
+        return@forEach
+      }
       val patchFile = patchFsDir.child(it.deltaName)
       createFinePatch(
         fineTool, it.orig, it.dest, patchFile,

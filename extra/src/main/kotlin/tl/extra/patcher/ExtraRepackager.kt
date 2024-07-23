@@ -232,7 +232,8 @@ _L 0x7$patchConfigByte0 0x00000004
         fineTool, PatchFsCreateMode.EXTRA,
         stockSrcDir.child("ULUS10576.BIN"), stockSrcDir.child("ULUS10576-PSN.BIN"), outEbootFile,
         extraUsCpkExtract, cpkReplacements, cpkPatchedFiles, nameReplacements,
-        stockSrcDir
+        stockSrcDir,
+        warn = warningCollector::warn,
       ).createTo(patchFsDir, decmpCacheDir, patchFsOut, pmfPatchFsOut)
     } else {
       patchFsOut.delete()

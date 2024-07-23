@@ -85,6 +85,5 @@ class PackageExtractor(srcDir: File, outDir: File, log: Log = Log()) {
       log.info("Duplicate files with content collision list:")
       log.info(duplicatesWithContentCollision.joinToString(separator = "\n"))
     }
-    log.info("Done")
   }
 }
