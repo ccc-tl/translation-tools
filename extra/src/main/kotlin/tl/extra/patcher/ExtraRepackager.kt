@@ -5,6 +5,7 @@ import kio.util.readJson
 import kio.util.toWHex
 import kmipsx.elf.patchElf
 import tl.extra.extraCpkUnpack
+import tl.extra.extraIsoUnpack
 import tl.extra.extraToolkit
 import tl.extra.extraUnpack
 import tl.extra.file.PakFile
@@ -31,12 +32,13 @@ fun repackageExtra(
   downloadTranslations: Boolean = publicBuild,
   warningCollector: WarningCollector = WarningCollector(),
 ): PatchBuildResult {
-  return ExtraRepackager(extraToolkit, extraCpkUnpack, extraUnpack, pspSdkHome, publicBuild, downloadTranslations, warningCollector)
+  return ExtraRepackager(extraToolkit, extraIsoUnpack, extraCpkUnpack, extraUnpack, pspSdkHome, publicBuild, downloadTranslations, warningCollector)
     .buildAll()
 }
 
 internal class ExtraRepackager(
   private val projectDir: File,
+  extraUsIsoExtract: File,
   private val extraUsCpkExtract: File,
   private val extraUsPakExtract: File,
   pspSdkDir: File,
@@ -49,7 +51,7 @@ internal class ExtraRepackager(
   private val buildDir = projectDir.child("build")
   private val toolsDir = projectDir.child("tools")
 
-  private val srcCpkFile = srcDir.child("data.cpk")
+  private val srcCpkFile = extraUsIsoExtract.child("PSP_GAME/USRDIR/data.cpk")
   private val srcDecryptedEboot = srcDir.child("ULUS10576.BIN")
   private val customPakFilesDir = srcDir.child("custom-pak-files")
   private val customCpkFilesDir = srcDir.child("custom-cpk-files")

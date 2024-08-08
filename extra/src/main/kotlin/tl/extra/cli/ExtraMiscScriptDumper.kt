@@ -27,7 +27,7 @@ fun main() {
   println("Done")
 }
 
-private class ExtraMiscScriptDumper(
+class ExtraMiscScriptDumper(
   scriptDir: File,
   private val baseEn: File,
   private val baseJp: File,
@@ -36,7 +36,7 @@ private class ExtraMiscScriptDumper(
   private val tocEntries = mutableListOf<String>()
 
   // see ExtraMainScriptDumper.kt for docs
-  private val combineOutputJpWithNotesAndOutputJpAsEn = true
+  private val combineOutputJpWithNotesAndOutputJpAsEn = false
 
   init {
     scriptDir.mkdir()

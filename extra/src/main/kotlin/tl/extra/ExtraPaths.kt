@@ -6,6 +6,7 @@ private val extraToolkitName = System.getenv("FE_EXTRA_TOOLKIT_NAME") ?: "_Extra
 
 val extraToolkit = fateBase.child(extraToolkitName)
 
+val extraIsoUnpack = fateBase.child("Unpack/FateExtra ISO")
 val extraCpkUnpack = fateBase.child("Unpack/FateExtra CPK")
 val extraPakUnpack = fateBase.child("Unpack/FateExtra PAK")
 val extraUnpack = fateBase.child("Unpack/FateExtra Combined")

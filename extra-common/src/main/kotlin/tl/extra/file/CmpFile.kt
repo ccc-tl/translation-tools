@@ -10,7 +10,7 @@ class CmpFile(file: File) {
   private val data: DecodedData
 
   init {
-    with(KioInputStream(file)) {
+    with(KioInputStream(file.readBytes())) {
       if (readString(4) != "IECP") {
         error("Not a CMP file.")
       }

@@ -18,7 +18,7 @@ fun main() {
 
 class CccSetupStep2(
   private val inputDir: File,
-  private val toolkitDir: File,
+  toolkitDir: File,
   private val extractDir: File,
 ) {
   private val srcDir = toolkitDir.child("src").also { it.mkdirs() }

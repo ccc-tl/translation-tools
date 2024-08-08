@@ -20,59 +20,74 @@ fun main() {
   val outDir = File(fateOutput, "extra_script_v4").child("dat")
   val baseEnDir = extraUnpack
   val baseJpDir = extraJpPakUnpack
+  ExtraMainScriptDumper(outDir, baseEnDir, baseJpDir)
+  println("Done")
+}
 
-  // If true then output for script editor will look like this:
-  // script-japanese: en text
-  // script-notes: combined notes and jp text
-  // script-translation: empty
-  // this is used when preparing translation project when translating from English to some other language
-  val combineOutputJpWithNotesAndOutputJpAsEn = true
+class ExtraMainScriptDumper(
+  outDir: File,
+  baseEnDir: File,
+  baseJpDir: File,
+  applyEntryFixes: Boolean = false,
+) {
+  init {
+    // If true then output for script editor will look like this:
+    // script-japanese: en text
+    // script-notes: combined notes and jp text
+    // script-translation: empty
+    // this is used when preparing translation project when translating from English to some other language
+    val combineOutputJpWithNotesAndOutputJpAsEn = false
 
-  val mainEntries = mutableListOf<CombinedDatEntry>()
-  val miscEntries = mutableListOf<CombinedDatEntry>()
-  val mainTextSet = mutableListOf<TextEntry>()
-  val miscTextSet = mutableListOf<TextEntry>()
-  val mainTextList = mutableListOf<TextEntry>()
-  val miscTextList = mutableListOf<TextEntry>()
+    val mainEntries = mutableListOf<CombinedDatEntry>()
+    val miscEntries = mutableListOf<CombinedDatEntry>()
+    val mainTextSet = mutableListOf<TextEntry>()
+    val miscTextSet = mutableListOf<TextEntry>()
+    val mainTextList = mutableListOf<TextEntry>()
+    val miscTextList = mutableListOf<TextEntry>()
 
-  outDir.mkdir()
-  walkDir(baseEnDir.child("field"), { _, e -> e.printStackTrace() }) {
-    if (it.extension == "dat") {
-      val dat = ExtraScriptDatFile(it.relativizePath(baseEnDir), baseEnDir, baseJpDir)
-      mainEntries.addAll(dat.mainText)
-      miscEntries.addAll(dat.miscText)
-    }
-  }
-  println("Parsing done, deduping...")
-
-  mainEntries.forEach {
-    val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
-    if (!mainTextSet.contains(entry)) {
-      mainTextSet.add(entry)
-      mainTextList.add(entry)
-    }
-  }
-  miscEntries.forEach {
-    val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
-    if (!miscTextSet.contains(entry)) {
-      miscTextSet.add(entry)
-      miscTextList.add(entry)
-    }
-  }
-  val entries = mutableListOf<ScriptEditorEntry>()
-  arrayOf(mainTextList, miscTextList).forEach { textList ->
-    textList.forEach {
-      if (combineOutputJpWithNotesAndOutputJpAsEn) {
-        entries.add(ScriptEditorEntry(it.enText, "", it.jpText))
-      } else {
-        entries.add(ScriptEditorEntry(it.enText, it.jpText))
+    outDir.mkdir()
+    walkDir(baseEnDir.child("field"), { _, e -> e.printStackTrace() }) {
+      if (it.extension == "dat") {
+        val dat = ExtraScriptDatFile(it.relativizePath(baseEnDir), baseEnDir, baseJpDir)
+        mainEntries.addAll(dat.mainText)
+        miscEntries.addAll(dat.miscText)
       }
     }
+    println("Parsing done, deduping...")
+
+    mainEntries.forEach {
+      val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
+      if (!mainTextSet.contains(entry)) {
+        mainTextSet.add(entry)
+        mainTextList.add(entry)
+      }
+    }
+    miscEntries.forEach {
+      val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
+      if (!miscTextSet.contains(entry)) {
+        miscTextSet.add(entry)
+        miscTextList.add(entry)
+      }
+    }
+    val entries = mutableListOf<ScriptEditorEntry>()
+    arrayOf(mainTextList, miscTextList).forEach { textList ->
+      textList.forEach {
+        if (combineOutputJpWithNotesAndOutputJpAsEn) {
+          entries.add(ScriptEditorEntry(it.enText, "", it.jpText))
+        } else {
+          entries.add(ScriptEditorEntry(it.jpText, it.enText))
+        }
+      }
+    }
+    if (applyEntryFixes) {
+      entries.removeAt(5642)
+      entries.removeAt(4835)
+      entries.removeAt(4824)
+    }
+    ScriptEditorFilesWriter(entries).writeTo(outDir)
+    outDir.child("entriesMain.json").writeText(Gson().toJson(mainEntries))
+    outDir.child("entriesMisc.json").writeText(Gson().toJson(miscEntries))
   }
-  ScriptEditorFilesWriter(entries).writeTo(outDir)
-  outDir.child("entriesMain.json").writeText(Gson().toJson(mainEntries))
-  outDir.child("entriesMisc.json").writeText(Gson().toJson(miscEntries))
-  println("Done")
 }
 
 private class ExtraScriptDatFile(val relPath: String, baseEnDir: File, baseJpDir: File) {
@@ -101,7 +116,7 @@ private class ExtraScriptDatFile(val relPath: String, baseEnDir: File, baseJpDir
 
   private fun processFileText() {
     arrayOf(enFile to arrayOf(enMainText, enMiscText), jpFile to arrayOf(jpMainText, jpMiscText)).forEach {
-      with(KioInputStream(it.first)) {
+      with(KioInputStream(it.first.readBytes())) {
         while (!eof()) {
           val op = readInt()
           if (op == 0x00003926) { // main dialogue text
