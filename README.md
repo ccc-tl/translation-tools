@@ -16,4 +16,5 @@ The code here has already done its job so any pull requests are unnecessary.
 This repository is licensed under the GPLv3 license, this license only applies to files in this
 repository and not to any other patch components or resources.
 
-Getting started guide for setting up CCC tools is available [here](https://github.com/ccc-tl/translation-tools/wiki/Getting-started-(CCC)).
+Getting started guides are available here for [CCC](https://github.com/ccc-tl/translation-tools/wiki/Getting-started-(CCC)) 
+and [Extra](https://github.com/ccc-tl/translation-tools/wiki/Getting-started-(Extra)).
