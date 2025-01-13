@@ -6,6 +6,7 @@ import tl.extra.file.replaceEntry
 import tl.extra.file.tex.TxbFile
 import tl.extra.patcher.PakWriter
 import java.io.File
+import javax.imageio.ImageIO
 
 abstract class Png2Tex(
   private val unpackDir: File,
@@ -21,6 +22,7 @@ abstract class Png2Tex(
     innerDirSuffix: String = "",
     dropEntries: List<Int> = emptyList(),
     copyToCustomPakFiles: Boolean = true,
+    customPaletteOverride: CustomPaletteOverride? = null,
   ) {
     val srcTex = File(unpackDir, srcTexPath)
     val dir = png2TexDir.child(baseDirName)
@@ -32,11 +34,14 @@ abstract class Png2Tex(
     }
     val outFile = dir.child(srcTex.name)
     val entries = PakFile(srcTex).entries
+    val customPaletteBytesOverride = customPaletteOverride?.let {
+      PaletteBytesGenerator(it.maxColors).fromImage(ImageIO.read(dir.child("modified$innerDirSuffix/${it.imageName}.png")))
+    }
     modifiedEntries.forEach { conv ->
       entries.replaceEntry(
         conv.idx,
         entries[conv.idx].path,
-        conv.type.convert(entries[conv.idx].bytes, dir.child("modified$innerDirSuffix/tex${conv.idx}.png"))
+        conv.type.convert(entries[conv.idx].bytes, dir.child("modified$innerDirSuffix/tex${conv.idx}.png"), customPaletteBytesOverride),
       )
     }
     val entriesList = entries.toMutableList()
@@ -58,3 +63,5 @@ abstract class Png2Tex(
 }
 
 class TexConversion(val idx: Int, val type: ConversionType)
+
+class CustomPaletteOverride(val maxColors: Int, val imageName: String)

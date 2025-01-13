@@ -12,20 +12,20 @@ enum class ConversionType {
   SWIZZLED_8BPP_CUSTOM_PALETTED_LINEAR_CCT,
   ;
 
-  fun convert(origBytes: ByteArray, pngFile: File): ByteArray {
+  fun convert(origBytes: ByteArray, pngFile: File, customPaletteBytesOverride: ByteArray?): ByteArray {
     println("Processing ${pngFile.absolutePath}...")
     return when (this) {
       UNSWIZZLED_4BPP_PALETTED_NO_CCT -> {
         PngToUnswizzled4BppPalettedTex(origBytes, pngFile).getTexBytes()
       }
       UNSWIZZLED_4BPP_CUSTOM_PALETTED_NO_CCT -> {
-        PngToUnswizzled4BppCustomPalettedTex(origBytes, pngFile).getTexBytes()
+        PngToUnswizzled4BppCustomPalettedTex(origBytes, pngFile, customPaletteBytesOverride).getTexBytes()
       }
       SWIZZLED_4BPP_PALETTED_LINEAR_CCT -> {
         PngToSwizzled4BppPalettedLinearCctTex(origBytes, pngFile).getTexBytes()
       }
       SWIZZLED_4BPP_CUSTOM_PALETTED_LINEAR_CCT -> {
-        PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes, pngFile).getTexBytes()
+        PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes, pngFile, customPaletteBytesOverride).getTexBytes()
       }
       SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA -> {
         PngToSwizzled4BppPalettedLinearCctTex(origBytes, pngFile, correctAlpha = true).getTexBytes()
@@ -34,7 +34,7 @@ enum class ConversionType {
         PngToSwizzled8BppPalettedLinearCctTex(origBytes, pngFile).getTexBytes()
       }
       SWIZZLED_8BPP_CUSTOM_PALETTED_LINEAR_CCT -> {
-        PngToSwizzled8BppCustomPalettedLinearCctTex(origBytes, pngFile).getTexBytes()
+        PngToSwizzled8BppCustomPalettedLinearCctTex(origBytes, pngFile, customPaletteBytesOverride).getTexBytes()
       }
     }
   }

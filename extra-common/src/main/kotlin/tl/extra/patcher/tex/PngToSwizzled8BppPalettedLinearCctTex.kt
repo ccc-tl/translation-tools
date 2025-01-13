@@ -71,7 +71,7 @@ class PngToSwizzled8BppPalettedLinearCctTex(origBytes: ByteArray, pngFile: File)
         swizzle8Bpp(
           newTexBytesStream.toByteArray(),
           newImageDataWidth,
-          newImageDataHeight
+          newImageDataHeight,
         )
 
       with(KioOutputStream(outStream)) {

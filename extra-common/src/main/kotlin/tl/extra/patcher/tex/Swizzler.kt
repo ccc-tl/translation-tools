@@ -70,10 +70,3 @@ fun swizzle8Bpp(encodedBytes: ByteArray, width: Int, height: Int): SwizzleResult
   chunks.forEach { output.write(it.bytes) }
   return SwizzleResult(chunks, chunksPerLine, chunkLines, output.toByteArray())
 }
-
-class SwizzleResult(
-  val chunks: List<Chunk>,
-  val chunksPerLineCount: Int,
-  val chunkLinesCount: Int,
-  val bytes: ByteArray,
-)

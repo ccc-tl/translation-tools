@@ -10,8 +10,9 @@ import java.io.File
 import javax.imageio.ImageIO
 
 @Suppress("UNUSED_VARIABLE")
-class PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes: ByteArray, pngFile: File) {
+class PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes: ByteArray, pngFile: File, paletteBytesOverride: ByteArray?) {
   private val outStream = ByteArrayOutputStream()
+  private val paletteBytesGenerator = PaletteBytesGenerator(16)
 
   init {
     with(KioInputStream(origBytes)) {
@@ -48,27 +49,7 @@ class PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes: ByteArray, pngFile:
       val unkP3 = readInt() // paletteOffset
       val palBytes = readBytes(palColorNum.toInt())
 
-      val newPalBytes = run {
-        val reader = ImageReader(newImage)
-        val colorsSet = mutableSetOf<Int>()
-        while (!reader.eof()) {
-          colorsSet.add(reader.nextPixel())
-        }
-        if (colorsSet.size > 16) {
-          error("Too much colors after reading image: ${colorsSet.size}")
-        }
-        val out = KioOutputStream(
-          ByteArrayOutputStream(),
-          littleEndian = false
-        )
-        colorsSet.forEach {
-          out.writeInt((it shl 8) or (it ushr 24))
-        }
-        while (out.pos() < 64) {
-          out.writeInt(0)
-        }
-        out.getAsByteArrayOutputStream().toByteArray()
-      }
+      val newPalBytes = paletteBytesOverride ?: paletteBytesGenerator.fromImage(newImage)
       val palette = ColorPalette(newPalBytes, ColorPalette.Mode.RGBA8888)
 
       val unkC0 = readInt()
@@ -96,7 +77,7 @@ class PngToSwizzled4BppCustomPalettedLinearCctTex(origBytes: ByteArray, pngFile:
       val swizzleResult = swizzle4Bpp(
         newTexBytesStream.toByteArray(),
         newImageDataWidth,
-        newImageDataHeight
+        newImageDataHeight,
       )
 
       with(KioOutputStream(outStream)) {

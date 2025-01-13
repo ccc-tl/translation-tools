@@ -77,7 +77,7 @@ class PngToSwizzled4BppPalettedLinearCctTex(origBytes: ByteArray, pngFile: File,
       val swizzleResult = swizzle4Bpp(
         newTexBytesStream.toByteArray(),
         newImageDataWidth,
-        newImageDataHeight
+        newImageDataHeight,
       )
 
       with(KioOutputStream(outStream)) {
