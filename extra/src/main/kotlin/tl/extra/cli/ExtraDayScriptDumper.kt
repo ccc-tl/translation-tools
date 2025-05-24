@@ -20,41 +20,50 @@ fun main() {
   val outDir = File(fateOutput, "extra_script_v4").child("day")
   val baseEnDir = extraCpkUnpack
   val baseJpDir = extraJpCpkUnpack
-
-  val mainEntries = mutableListOf<CombinedDatEntry>()
-  val mainTextSet = mutableListOf<TextEntry>()
-  val mainTextList = mutableListOf<TextEntry>()
-
-  // see ExtraMainScriptDumper.kt for docs
-  val combineOutputJpWithNotesAndOutputJpAsEn = true
-
-  outDir.mkdir()
-  walkDir(baseEnDir.child("day"), { _, e -> e.printStackTrace() }) {
-    if (it.extension == "dat") {
-      val dat = ExtraScriptDatDayFile(it.relativizePath(baseEnDir), baseEnDir, baseJpDir)
-      mainEntries.addAll(dat.mainText)
-    }
-  }
-  println("Parsing done, deduping...")
-
-  mainEntries.forEach {
-    val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
-    if (!mainTextSet.contains(entry)) {
-      mainTextSet.add(entry)
-      mainTextList.add(entry)
-    }
-  }
-  val entries = mutableListOf<ScriptEditorEntry>()
-  mainTextList.forEach {
-    if (combineOutputJpWithNotesAndOutputJpAsEn) {
-      entries.add(ScriptEditorEntry(it.enText, "", it.jpText))
-    } else {
-      entries.add(ScriptEditorEntry(it.enText, it.jpText))
-    }
-  }
-  ScriptEditorFilesWriter(entries).writeTo(outDir)
-  outDir.child("entries.json").writeText(Gson().toJson(mainEntries))
+  ExtraDayScriptDumper(outDir, baseEnDir, baseJpDir)
   println("Done")
+}
+
+class ExtraDayScriptDumper(
+  outDir: File,
+  baseEnDir: File,
+  baseJpDir: File,
+) {
+  init {
+    val mainEntries = mutableListOf<CombinedDatEntry>()
+    val mainTextSet = mutableListOf<TextEntry>()
+    val mainTextList = mutableListOf<TextEntry>()
+
+    // see ExtraMainScriptDumper.kt for docs
+    val combineOutputJpWithNotesAndOutputJpAsEn = false
+
+    outDir.mkdir()
+    walkDir(baseEnDir.child("day"), { _, e -> e.printStackTrace() }) {
+      if (it.extension == "dat") {
+        val dat = ExtraScriptDatDayFile(it.relativizePath(baseEnDir), baseEnDir, baseJpDir)
+        mainEntries.addAll(dat.mainText)
+      }
+    }
+    println("Parsing done, deduping...")
+
+    mainEntries.forEach {
+      val entry = TextEntry(it.enEntry.text, it.jpEntry.text)
+      if (!mainTextSet.contains(entry)) {
+        mainTextSet.add(entry)
+        mainTextList.add(entry)
+      }
+    }
+    val entries = mutableListOf<ScriptEditorEntry>()
+    mainTextList.forEach {
+      if (combineOutputJpWithNotesAndOutputJpAsEn) {
+        entries.add(ScriptEditorEntry(it.enText, "", it.jpText))
+      } else {
+        entries.add(ScriptEditorEntry(it.jpText, it.enText))
+      }
+    }
+    ScriptEditorFilesWriter(entries).writeTo(outDir)
+    outDir.child("entries.json").writeText(Gson().toJson(mainEntries))
+  }
 }
 
 private class ExtraScriptDatDayFile(val relPath: String, baseEnDir: File, baseJpDir: File) {
@@ -80,14 +89,14 @@ private class ExtraScriptDatDayFile(val relPath: String, baseEnDir: File, baseJp
       with(KioInputStream(it.first)) {
         while (!eof()) {
           val op = readInt()
-          if (op == 0x00000126) { // poem?
-            readInt()
-            readInt()
+          if (op == 0x00003926) { // main dialogue text
             val ptrLoc = pos()
             val ptr = readInt()
             readStringAt(this, ptr, ptrLoc, it.second)
           }
-          if (op == 0x00003926) { // main dialogue text
+          if (op == 0x00000126) { // poem?
+            readInt()
+            readInt()
             val ptrLoc = pos()
             val ptr = readInt()
             readStringAt(this, ptr, ptrLoc, it.second)

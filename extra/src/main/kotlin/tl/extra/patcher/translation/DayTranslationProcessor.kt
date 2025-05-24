@@ -8,7 +8,7 @@ import tl.extra.patcher.file.CombinedDatEntry
 import tl.extra.patcher.file.ExtraDatFilePatcher
 import java.io.File
 
-internal class DatTranslationProcessor(
+internal class DayTranslationProcessor(
   private val pakExtract: File,
   private val unitDir: File,
   outDir: File,
@@ -27,18 +27,14 @@ internal class DatTranslationProcessor(
     if (isPatchingNeeded()) {
       patchFiles()
     } else {
-      println("DAT patching not needed")
+      println("Day DAT patching not needed")
     }
   }
 
   private fun patchFiles() {
     checkDuplicates()
     patchedOut.mkdir()
-    val entriesMain: List<CombinedDatEntry> = unitDir.child("entriesMain.json").readJson()
-    val entriesMisc: List<CombinedDatEntry> = unitDir.child("entriesMisc.json").readJson()
-    val entries = mutableListOf<CombinedDatEntry>()
-    entries.addAll(entriesMain)
-    entries.addAll(entriesMisc)
+    val entries: List<CombinedDatEntry> = unitDir.child("entries.json").readJson()
     entries
       .groupBy { it.relPath }
       .forEach { (relPath, fileEntries) ->
@@ -76,7 +72,7 @@ internal class DatTranslationProcessor(
           translatedSet.add(Pair(set.second, newText))
         }
         if (translatedSet.size > 1) {
-          warn("DAT English duplicate: ${translatedSet.first().first}")
+          warn("Day DAT English duplicate: ${translatedSet.first().first}")
         }
       }
   }
@@ -92,7 +88,7 @@ internal class DatTranslationProcessor(
       translation,
       translationOrig,
       entries,
-      dayDat = false,
+      dayDat = true,
     )
   }
 }

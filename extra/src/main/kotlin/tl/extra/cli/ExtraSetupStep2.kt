@@ -75,7 +75,8 @@ class ExtraSetupStep2(
     println("Preparing translations...")
     ExtraMainScriptDumper(srcDir.child("translation/dat"), extractDir, extractJpPakDir, applyEntryFixes = true)
     ExtraMiscScriptDumper(srcDir.child("translation/misc"), extractDir, extractJpPakDir)
-    listOf("dat", "misc").forEach { unit ->
+    ExtraDayScriptDumper(srcDir.child("translation/day"), extractDir, extractJpPakDir)
+    listOf("dat", "misc", "day").forEach { unit ->
       srcDir.child("translation/$unit/script-translation.txt").copyTo(srcDir.child("translation/$unit/script-translation-orig.txt"))
     }
     translationTemplateDir.copyRecursively(translationDir, overwrite = true)

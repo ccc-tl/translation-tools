@@ -14,6 +14,7 @@ internal class ExtraDatFilePatcher(
   translation: ExtraTranslation,
   origTranslation: ExtraTranslation,
   entries: List<CombinedDatEntry>,
+  dayDat: Boolean,
 ) {
   init {
     outFile.writeBytes(origBytes)
@@ -27,8 +28,8 @@ internal class ExtraDatFilePatcher(
         println("TL WARN: DAT Missing entry: ${it.enEntry.text}")
         return@forEach
       }
-      if (tlIndex == 1763) {
-        if (it.jpEntry.text.startsWith("#C120200255ありす#CDEFは#C255120120アリス#CDEF。")) {
+      if (!dayDat) {
+        if (tlIndex == 1763 && it.jpEntry.text.startsWith("#C120200255ありす#CDEFは#C255120120アリス#CDEF。")) {
           tlIndex = 1764
         }
       }

@@ -11,6 +11,7 @@ import tl.extra.extraUnpack
 import tl.extra.file.PakFile
 import tl.extra.patcher.eboot.ExtraAsmPatcher
 import tl.extra.patcher.translation.DatTranslationProcessor
+import tl.extra.patcher.translation.DayTranslationProcessor
 import tl.extra.patcher.translation.ExtraTranslation
 import tl.extra.patcher.translation.MiscTranslationProcessor
 import tl.extra.util.PakReferenceMap
@@ -86,6 +87,7 @@ internal class ExtraRepackager(
   private val remoteTranslationsConfig = mapOf(
     "extra-dat" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("dat")),
     "extra-misc" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("misc")),
+    "extra-day" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("day")),
     "extra-subs" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("subs")),
     "extra-subs-se" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("subs-se")),
   )
@@ -136,6 +138,7 @@ internal class ExtraRepackager(
     println("--- Process translation units ---")
     DatTranslationProcessor(extraUsPakExtract, translationDir.child("dat"), imDir.child("dat"), warningCollector::warn)
     MiscTranslationProcessor(extraUsPakExtract, srcDir, translationDir.child("misc"), imDir.child("misc"))
+    DayTranslationProcessor(extraUsPakExtract, translationDir.child("day"), imDir.child("day"), warningCollector::warn)
     val subs = ExtraTranslation(
       translationDir.child("subs/script-japanese-orig.txt"),
       checkForAsciiOnly = true,
@@ -260,6 +263,7 @@ _L 0x7$patchConfigByte0 0x00000004
     val collector = FileCollector(projectDir, "CPK", warningCollector::warn)
     collector.includeDir(customCpkFilesDir)
     collector.includeDir(imDir.child("pak/patched"))
+    collector.includeDir(imDir.child("day/patched"))
     return collector.files
   }
 }
