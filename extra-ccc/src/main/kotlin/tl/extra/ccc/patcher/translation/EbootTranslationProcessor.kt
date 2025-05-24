@@ -68,7 +68,7 @@ class EbootTranslationProcessor(unitDir: File, private val warn: (String) -> Uni
           arrayCopy(
             src = Array(target.allowedSize) { 0.toByte() }.toByteArray(),
             dest = ebootBytes,
-            destPos = patchDestAddr
+            destPos = patchDestAddr,
           )
           if (target.auxPatchUsed) {
             warn("EBOOT translation[$textIndex]: Standard overwrite entry provides aux patch. Ignored. $jpText => $patchText")
@@ -83,7 +83,7 @@ class EbootTranslationProcessor(unitDir: File, private val warn: (String) -> Uni
       val emptyBlocksTotal = emptyBlocks.sumOf { it.size - it.usedBytes }
       warn(
         "EBOOT translation: Need $extraRequiredBytes bytes to patch all entries, those entries free up $freedBytes bytes. " +
-          "Empty blocks provide additional $emptyBlocksTotal bytes."
+          "Empty blocks provide additional $emptyBlocksTotal bytes.",
       )
     }
 

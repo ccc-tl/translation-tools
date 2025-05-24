@@ -26,8 +26,8 @@ fun main(args: Array<String>) {
         baseTranslation.enTexts.getOrElse(idx) { "" },
         baseTranslation.notes.getOrElse(idx) { "" },
         "",
-        ""
-      )
+        "",
+      ),
     )
   }
   ScriptEditorFilesWriter(newEntries).writeTo(dest)

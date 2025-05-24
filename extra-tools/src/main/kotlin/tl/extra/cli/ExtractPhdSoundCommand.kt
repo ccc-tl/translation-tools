@@ -10,7 +10,7 @@ import tl.util.PhdSoundProcessor
 
 class ExtractPhdSoundCommand : CliktCommand(
   name = "phd",
-  help = "Batch extract and convert PHD/PBD sound files into WAV. Only tested with Fate/Extra, Fate/Extra CCC and few other games."
+  help = "Batch extract and convert PHD/PBD sound files into WAV. Only tested with Fate/Extra, Fate/Extra CCC and few other games.",
 ) {
   private val noIdMap by option("--no-id-map", help = "Do not generate ID map JSON.")
     .flag(default = false)
@@ -28,7 +28,7 @@ class ExtractPhdSoundCommand : CliktCommand(
       .process(
         source,
         dest,
-        writeIdMap = !noIdMap
+        writeIdMap = !noIdMap,
       )
   }
 }

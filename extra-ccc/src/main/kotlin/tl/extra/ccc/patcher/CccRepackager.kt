@@ -157,7 +157,7 @@ class CccRepackager(
       mapOf(
         ScriptWriteMode.COMPAT_TRANSLATED to translationSubsSeDir,
         ScriptWriteMode.JSON to translationSubsSeDir,
-      )
+      ),
   )
 
   private val pakRefs by lazy {
@@ -230,8 +230,13 @@ class CccRepackager(
     val textMeasure = TextMeasure(7, warningCollector::warn)
     val remappedTextDataOut = KioOutputStream(ByteArrayOutputStream())
     DatTranslationProcessor(
-      cccPakExtract, translationImDir, translationDatDir, imDir.child("dat-cache.json"), remappedTextDataOut,
-      textMeasure, warningCollector::warn
+      cccPakExtract,
+      translationImDir,
+      translationDatDir,
+      imDir.child("dat-cache.json"),
+      remappedTextDataOut,
+      textMeasure,
+      warningCollector::warn,
     )
     val eboot = EbootTranslationProcessor(translationEbootDir, warningCollector::warn)
     val infomatrixTranslationDir = translationInfomatrixDir
@@ -243,11 +248,13 @@ class CccRepackager(
     SgTranslationProcessor(cccPakExtract, translationImDir, translationSgDir, textMeasure, warningCollector::warn)
     val subs = CccTranslation(
       translationSubsDir.child("script-japanese.txt"),
-      stripNewLine = false, replaceLiteralNewLine = false
+      stripNewLine = false,
+      replaceLiteralNewLine = false,
     )
     val subsSe = CccTranslation(
       translationSubsSeDir.child("script-japanese.txt"),
-      stripNewLine = false, replaceLiteralNewLine = false
+      stripNewLine = false,
+      replaceLiteralNewLine = false,
     )
     val seList = translationSubsSeDir.child("se-list.txt")
       .readLines()
@@ -255,7 +262,7 @@ class CccRepackager(
     SubsTranslationProcessor(
       nativeDir, subs, subsSe, seList,
       translationSubsSeDir.child("idMap.json").readJson(), textMeasure,
-      publicBuild, remappedTextDataOut.getAsByteArrayOutputStream().toByteArray(), warningCollector::warn
+      publicBuild, remappedTextDataOut.getAsByteArrayOutputStream().toByteArray(), warningCollector::warn,
     )
     return CompletedTranslationProcessors(items, eboot)
   }
@@ -284,7 +291,7 @@ class CccRepackager(
     PoemPatcher(
       cccPakExtract.child("interface/poem/$name.dat"),
       cccPakExtract.child("interface/poem/$name.mob"),
-      updates
+      updates,
     ).patchTo(poemImDir.child("interface/poem"))
   }
 
@@ -307,9 +314,11 @@ class CccRepackager(
     copyNativeCode(this, "FE_CUSTOM_NATIVE_CCC_DIR", "/native/ccc/", nativeDir, warningCollector::warn)
     println("--- Assemble patches ---")
     cccPatcher.assemble(
-      PakFile(cccCpkExtract.child("pack/PRELOAD.pak")), pakReplacements,
-      translations.items.remapper01, translations.items.remapper04,
-      srcDir.child("credits.txt").takeIf { it.exists() }?.readText() ?: ""
+      PakFile(cccCpkExtract.child("pack/PRELOAD.pak")),
+      pakReplacements,
+      translations.items.remapper01,
+      translations.items.remapper04,
+      srcDir.child("credits.txt").takeIf { it.exists() }?.readText() ?: "",
     )
   }
 
@@ -341,7 +350,7 @@ class CccRepackager(
     replacer.processReplacementGroup(
       "Meltryllis",
       listOf(
-        NameReplacementPattern("Meltlilith", "Meltryllis")
+        NameReplacementPattern("Meltlilith", "Meltryllis"),
       ),
       listOf(
         NameReplacementPakFile("pack/osioki_mll.pak", "interface/sg/sg_mll.txb", png2TexDir.child("sg_alt/sg_mll.txb")),
@@ -350,15 +359,15 @@ class CccRepackager(
         NameReplacementPakFile("pack/field_map_033.pak", "interface/dayresult/day_result00.txb", png2TexDir.child("dayresult_alt/day_result00.txb")),
         NameReplacementPakFile("pack/field_map_071.pak", "interface/dayresult/day_result00.txb", png2TexDir.child("dayresult_alt/day_result00.txb")),
         NameReplacementPakFile("pack/0000/btl_vs.pak", "battle/interface/vs/btl_vs.txb", png2TexDir.child("btl_vs_alt/btl_vs.txb")),
-        NameReplacementPakFile("pack/PRELOAD.pak", "interface/cmn/i_con_name.txb", png2TexDir.child("i_con_name_alt/i_con_name.txb"))
-      )
+        NameReplacementPakFile("pack/PRELOAD.pak", "interface/cmn/i_con_name.txb", png2TexDir.child("i_con_name_alt/i_con_name.txb")),
+      ),
     )
     replacer.processReplacementGroup(
       "Maestro",
       listOf(
         NameReplacementPattern("Praetor", "Maestro"),
-        NameReplacementPattern("eyes, Prae", "eyes, Maes", descriptorFilter = { it.relPath == "pack/field_map_002.pak" })
-      )
+        NameReplacementPattern("eyes, Prae", "eyes, Maes", descriptorFilter = { it.relPath == "pack/field_map_002.pak" }),
+      ),
     )
     return replacer.getReplacements()
       .toMutableMap()
@@ -367,8 +376,8 @@ class CccRepackager(
           "Meltryllis-EBOOT",
           NameReplacement(
             patterns = listOf(NameReplacementPatternResults("Meltryllis", listOf(0x21B4D4))),
-            pakFiles = emptyList()
-          )
+            pakFiles = emptyList(),
+          ),
         )
         val ebootOffset = 0xa0L
         put(
@@ -378,10 +387,10 @@ class CccRepackager(
               NameReplacementPatternResults("ruby.txb", listOf(0x001BA14C + ebootOffset)),
               NameReplacementPatternResults("ruby.bin", listOf(0x001BA164 + ebootOffset), clearSize = 9),
               NameReplacementPatternResults("\u0009", listOf(0x000E339C + ebootOffset), clearSize = 1),
-              NameReplacementPatternResults("\u0009", listOf(0x000E33A4 + ebootOffset), clearSize = 1)
+              NameReplacementPatternResults("\u0009", listOf(0x000E33A4 + ebootOffset), clearSize = 1),
             ),
-            pakFiles = emptyList()
-          )
+            pakFiles = emptyList(),
+          ),
         )
       }
   }
@@ -399,7 +408,7 @@ _C0 Hide subtitles
 _L 0x7$patchConfigByte0 0x00000004
 _C0 Use original BB Channel drop shadow
 _L 0x7$patchConfigByte0 0x00000008
-      """.trimIndent().replace("\n", "\r\n")
+      """.trimIndent().replace("\n", "\r\n"),
     )
   }
 
@@ -412,7 +421,7 @@ _L 0x7$patchConfigByte0 0x00000008
         stockSrcDir.child("NPJH50505.BIN"), stockSrcDir.child("NPJH50505-PSN.BIN"), outEbootFile,
         cccCpkExtract, cpkReplacements, cpkPatchedFiles, nameReplacements,
         stockSrcDir, isoBuildDir,
-        warningCollector::warn
+        warningCollector::warn,
       ).createTo(patchFsDir, decmpCacheDir, patchFsOut, pmfPatchFsOut)
     } else {
       patchFsOut.delete()

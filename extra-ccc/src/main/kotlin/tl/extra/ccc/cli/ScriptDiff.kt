@@ -12,7 +12,7 @@ fun main() {
   ScriptDiff(
     cccToolkit.child("src/translation/dat"),
     fateOutput.child("script-translation-12-07.txt"),
-    fateOutput.child("ccc-script-diff3")
+    fateOutput.child("ccc-script-diff3"),
   ).process()
   println("Done")
 }
@@ -25,7 +25,7 @@ class ScriptDiff(
   private val translation = CccTranslation(
     translationDir.child("script-japanese.txt"),
     stripNewLine = true,
-    stripJpAndNotesNewLine = false
+    stripJpAndNotesNewLine = false,
   )
   private val translationBase = CccTranslation(
     translationDir.child("script-japanese.txt"),

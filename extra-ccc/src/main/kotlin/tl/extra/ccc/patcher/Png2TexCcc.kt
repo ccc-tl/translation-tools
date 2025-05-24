@@ -17,7 +17,7 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
   baseDir.child("src/png2tex"),
   baseDir.child("src/custom-pak-files"),
   extract = false,
-  verify = true
+  verify = true,
 ) {
   init {
     repackProgress()
@@ -61,20 +61,22 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
 
   private fun repackProgress() {
     repackTexture(
-      "progress", "interface/progress/0000.txb",
+      "progress",
+      "interface/progress/0000.txb",
       listOf(
         TexConversion(14, ConversionType.SWIZZLED_4BPP_CUSTOM_PALETTED_LINEAR_CCT),
         TexConversion(15, ConversionType.SWIZZLED_4BPP_CUSTOM_PALETTED_LINEAR_CCT),
         TexConversion(16, ConversionType.SWIZZLED_4BPP_CUSTOM_PALETTED_LINEAR_CCT),
         TexConversion(17, ConversionType.SWIZZLED_4BPP_CUSTOM_PALETTED_LINEAR_CCT),
-        TexConversion(19, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(19, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackInfoMatrix() {
     repackTexture(
-      "infomatrixex", "interface/infomatrixex/0000.txb",
+      "infomatrixex",
+      "interface/infomatrixex/0000.txb",
       listOf(
         TexConversion(26, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(27, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -116,8 +118,8 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(146, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(147, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(148, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(150, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(150, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -126,47 +128,51 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
       "loca_01", "loca_02", "loca_03", "loca_04", "loca_05", "loca_06",
       "loca_07", "loca_08", "loca_09", "loca_10", "loca_11", "loca_12",
       "loca_13", "loca_14", "loca_15", "loca_16", "loca_17", "loca_18",
-      "loca_19", "loca_20"
+      "loca_19", "loca_20",
     ).forEach { loca ->
       repackTexture(
-        "dungeon", "interface/dungeon/$loca.txb",
+        "dungeon",
+        "interface/dungeon/$loca.txb",
         listOf(
           TexConversion(0, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
-          TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA)
+          TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
         ),
-        innerDirSuffix = " $loca"
+        innerDirSuffix = " $loca",
       )
     }
 
     listOf("loca_21", "loca_22", "loca_23").forEach { loca ->
       repackTexture(
-        "dungeon", "interface/dungeon/$loca.txb",
+        "dungeon",
+        "interface/dungeon/$loca.txb",
         listOf(
-          TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA)
+          TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
         ),
-        innerDirSuffix = " $loca"
+        innerDirSuffix = " $loca",
       )
     }
 
     listOf("loca_24", "loca_25").forEach { loca ->
       repackTexture(
-        "dungeon", "interface/dungeon/$loca.txb",
+        "dungeon",
+        "interface/dungeon/$loca.txb",
         listOf(
           TexConversion(0, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
           TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
-          TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA)
+          TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT_CORRECT_ALPHA),
         ),
-        innerDirSuffix = " $loca"
+        innerDirSuffix = " $loca",
       )
     }
   }
 
   private fun repackMainMenu() {
     repackTexture(
-      "mainmenu", "interface/mainmenu/0001.txb",
+      "mainmenu",
+      "interface/mainmenu/0001.txb",
       listOf(
-        TexConversion(89, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(89, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -180,66 +186,74 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
           }
 
         repackTexture(
-          "evgraphic", "interface/event/pict/${file.name}", texToConvert,
-          innerDirSuffix = " ${file.nameWithoutExtension}"
+          "evgraphic",
+          "interface/event/pict/${file.name}",
+          texToConvert,
+          innerDirSuffix = " ${file.nameWithoutExtension}",
         )
       }
   }
 
   private fun repackMyRoom() {
     repackTexture(
-      "myroom", "interface/myroom/myroom.txb",
+      "myroom",
+      "interface/myroom/myroom.txb",
       listOf(
         TexConversion(16, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(52, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(52, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackICon() {
     repackTexture(
-      "i_con", "interface/cmn/i_con.txb",
+      "i_con",
+      "interface/cmn/i_con.txb",
       listOf(
         TexConversion(12, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-      )
+      ),
     )
   }
 
   private fun repackISelect() {
     repackTexture(
-      "i_select", "interface/select/i_select.txb",
+      "i_select",
+      "interface/select/i_select.txb",
       listOf(
         TexConversion(11, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(12, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(12, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackIBpt() {
     repackTexture(
-      "i_bpt", "interface/cmn/i_bpt.txb",
+      "i_bpt",
+      "interface/cmn/i_bpt.txb",
       listOf(
         TexConversion(0, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackBtlMenu() {
     repackTexture(
-      "btl_menu", "battle/interface/btl_menu.txb",
+      "btl_menu",
+      "battle/interface/btl_menu.txb",
       listOf(
         TexConversion(36, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(109, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(110, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(111, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(111, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackBtlEmi() {
     repackTexture(
-      "btl_emi", "battle/interface/emi/0001.txb",
+      "btl_emi",
+      "battle/interface/emi/0001.txb",
       listOf(
         TexConversion(0, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -253,33 +267,35 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(15, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(17, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(18, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-      )
+      ),
     )
   }
 
   private fun repackShop() {
     // Align manually fixed
     repackTexture(
-      "shop", "interface/shop/shop_00.txb",
+      "shop",
+      "interface/shop/shop_00.txb",
       listOf(
         TexConversion(5, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(39, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(40, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(42, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(13, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(13, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackEquip() {
     // Align manually fixed
     repackTexture(
-      "equip", "interface/equip/equip_00.txb",
+      "equip",
+      "interface/equip/equip_00.txb",
       listOf(
         TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(14, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(15, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(15, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -291,16 +307,17 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
       listOf(45, 46, 47, 49).map {
         TexConversion(it, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
       },
-      innerDirSuffix = " sgselect_tex"
+      innerDirSuffix = " sgselect_tex",
     )
   }
 
   private fun repackGallery() {
     repackTexture(
-      "gallery", "interface/gallery/gallery_tex.txb",
+      "gallery",
+      "interface/gallery/gallery_tex.txb",
       listOf(
-        TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -310,8 +327,8 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
       "title",
       "interface/title/0000.txb",
       listOf(
-        TexConversion(18, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(18, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -325,7 +342,8 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
 
   private fun repackBtlVs(baseDirName: String, copyToCustomPakFiles: Boolean) {
     repackTexture(
-      baseDirName, "battle/interface/vs/btl_vs.txb",
+      baseDirName,
+      "battle/interface/vs/btl_vs.txb",
       listOf(
         TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(9, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -334,9 +352,9 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(35, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(37, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(38, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(41, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
+        TexConversion(41, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
       ),
-      copyToCustomPakFiles = copyToCustomPakFiles
+      copyToCustomPakFiles = copyToCustomPakFiles,
     )
   }
 
@@ -362,8 +380,10 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         }
 
         repackTexture(
-          "sg", "interface/sg/${file.name}", texToConvert,
-          innerDirSuffix = " ${file.nameWithoutExtension}"
+          "sg",
+          "interface/sg/${file.name}",
+          texToConvert,
+          innerDirSuffix = " ${file.nameWithoutExtension}",
         )
       }
   }
@@ -387,9 +407,11 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         }
 
         repackTexture(
-          "sg_alt", "interface/sg/${file.name}", texToConvert,
+          "sg_alt",
+          "interface/sg/${file.name}",
+          texToConvert,
           innerDirSuffix = " ${file.nameWithoutExtension}",
-          copyToCustomPakFiles = false
+          copyToCustomPakFiles = false,
         )
       }
   }
@@ -397,66 +419,73 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
   private fun repackItem() {
     // Align manually fixed
     repackTexture(
-      "item", "interface/item/item_00.txb",
+      "item",
+      "interface/item/item_00.txb",
       listOf(
-        TexConversion(11, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(11, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackSave() {
     repackTexture(
-      "save", "interface/save/0000.txb",
+      "save",
+      "interface/save/0000.txb",
       listOf(
         TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(7, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(9, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(11, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
+        TexConversion(11, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
       ),
-      innerDirSuffix = " 0000"
+      innerDirSuffix = " 0000",
     )
     repackTexture(
-      "save", "interface/save/0001.txb",
+      "save",
+      "interface/save/0001.txb",
       listOf(
         TexConversion(7, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
+        TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
       ),
-      innerDirSuffix = " 0001"
+      innerDirSuffix = " 0001",
     )
   }
 
   private fun repackDungeonSelect() {
     repackTexture(
-      "dungeonselect", "interface/dungeonselect/dungeon_select.txb",
+      "dungeonselect",
+      "interface/dungeonselect/dungeon_select.txb",
       (1..20).map {
         TexConversion(it, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      }
+      },
     )
   }
 
   private fun repackLogo() {
     repackTexture(
-      "logo", "interface/logo/0000.txb",
+      "logo",
+      "interface/logo/0000.txb",
       listOf(
-        TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackGameOver() {
     repackTexture(
-      "gameover", "interface/gameover/gov_00.txb",
+      "gameover",
+      "interface/gameover/gov_00.txb",
       listOf(
         TexConversion(3, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackOption() {
     repackTexture(
-      "option", "interface/option/option_00.txb",
+      "option",
+      "interface/option/option_00.txb",
       listOf(
         TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(5, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -465,14 +494,15 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(9, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(10, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(28, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(28, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackStatus() {
     repackTexture(
-      "status", "interface/status/0000.txb",
+      "status",
+      "interface/status/0000.txb",
       listOf(
         TexConversion(13, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(14, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -483,46 +513,50 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(29, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(30, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(81, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(82, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(82, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackModeSelect() {
     repackTexture(
-      "modeselect", "interface/modeselect/modeselect.txb",
+      "modeselect",
+      "interface/modeselect/modeselect.txb",
       listOf(
         TexConversion(3, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(5, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(6, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(12, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(12, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
   private fun repackFont() {
     repackTexture(
-      "font", "font.txb",
+      "font",
+      "font.txb",
       listOf(
         TexConversion(0, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT),
         TexConversion(10, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT),
-        TexConversion(11, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT)
-      )
+        TexConversion(11, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT),
+      ),
     )
   }
 
   private fun repackRuby() {
     repackTexture(
-      "ruby", "ruby.txb",
+      "ruby",
+      "ruby.txb",
       listOf(TexConversion(0, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT)),
-      dropEntries = listOf(1)
+      dropEntries = listOf(1),
     )
   }
 
   private fun repackAdvice() {
     // Some images are wider but game auto centers them
     repackTexture(
-      "advice", "interface/advice/0000.txb",
+      "advice",
+      "interface/advice/0000.txb",
       listOf(
         TexConversion(1, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(2, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
@@ -530,8 +564,8 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(4, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(5, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(7, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
-        TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT)
-      )
+        TexConversion(8, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
+      ),
     )
   }
 
@@ -546,11 +580,12 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
 
   private fun repackIconName(baseDirName: String, copyToCustomPakFiles: Boolean) {
     repackTexture(
-      baseDirName, "interface/cmn/i_con_name.txb",
+      baseDirName,
+      "interface/cmn/i_con_name.txb",
       (0..37).map {
         TexConversion(it, ConversionType.UNSWIZZLED_4BPP_PALETTED_NO_CCT)
       },
-      copyToCustomPakFiles = copyToCustomPakFiles
+      copyToCustomPakFiles = copyToCustomPakFiles,
     )
   }
 
@@ -559,63 +594,63 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
       "cpt_00" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(13, 14, 15, 16, 17)
-        )
+          listOf(13, 14, 15, 16, 17),
+        ),
       ),
       "cpt_01" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 12, 13, 14, 15, 16, 17, 18, 19, 20)
-        )
+          listOf(9, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+        ),
       ),
       "cpt_02" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-        )
+          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23),
+        ),
       ),
       "cpt_03" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25)
-        )
+          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25),
+        ),
       ),
       "cpt_04" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20)
-        )
+          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20),
+        ),
       ),
       "cpt_05" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-        )
+          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23),
+        ),
       ),
       "cpt_06" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
-        )
+          listOf(9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28),
+        ),
       ),
       "cpt_07" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15)
-        )
+          listOf(9, 13, 14, 15),
+        ),
       ),
       "cpt_08" to listOf(
         Pair(
           ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT,
-          listOf(9, 13, 14, 15)
-        )
+          listOf(9, 13, 14, 15),
+        ),
       ),
       "poem_ex_tex" to listOf(
         Pair(
           ConversionType.SWIZZLED_8BPP_CUSTOM_PALETTED_LINEAR_CCT,
-          listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        )
-      )
+          listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+        ),
+      ),
     )
     poemsTextures.forEach { (chapterName, config) ->
       val conversions = config.flatMap { (convertMode, texIds) ->
@@ -625,7 +660,7 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         "poem",
         "interface/poem/$chapterName.txb",
         conversions,
-        innerDirSuffix = " $chapterName"
+        innerDirSuffix = " $chapterName",
       )
     }
   }
@@ -644,14 +679,14 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
         TexConversion(2, ConversionType.SWIZZLED_8BPP_PALETTED_LINEAR_CCT),
         TexConversion(4, ConversionType.SWIZZLED_8BPP_CUSTOM_PALETTED_LINEAR_CCT),
         TexConversion(5, ConversionType.SWIZZLED_8BPP_CUSTOM_PALETTED_LINEAR_CCT),
-      )
+      ),
     )
     staffRollTextures.forEach { (setName, conversions) ->
       repackTexture(
         "staffroll",
         "interface/staffroll/staffroll_$setName.txb",
         conversions,
-        innerDirSuffix = " staffroll_$setName"
+        innerDirSuffix = " staffroll_$setName",
       )
     }
   }
@@ -666,14 +701,15 @@ internal class Png2TexCcc(baseDir: File) : Png2Tex(
 
   private fun repackDayResultBase(baseDirName: String, copyToCustomPakFiles: Boolean) {
     repackTexture(
-      baseDirName, "interface/dayresult/day_result00.txb",
+      baseDirName,
+      "interface/dayresult/day_result00.txb",
       listOf(
         TexConversion(19, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(20, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(23, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
         TexConversion(24, ConversionType.SWIZZLED_4BPP_PALETTED_LINEAR_CCT),
       ),
-      copyToCustomPakFiles = copyToCustomPakFiles
+      copyToCustomPakFiles = copyToCustomPakFiles,
     )
   }
 }

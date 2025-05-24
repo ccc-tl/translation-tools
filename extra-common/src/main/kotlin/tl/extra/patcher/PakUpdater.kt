@@ -71,8 +71,8 @@ class PakUpdater(
         PakFileEntry(
           newEntries.last().index + 1,
           "hax/patch.o",
-          padArray(auxPatchBytes)
-        )
+          padArray(auxPatchBytes),
+        ),
       )
     }
     println("Writing modified PAK $relPath")

@@ -22,7 +22,7 @@ class ImmFile(bytes: ByteArray) {
         readInt(), readInt(), readInt(), readInt(), readInt(),
         readInt(), readInt(), readInt(), readInt(), readInt(),
         readInt(), readInt(), readInt(), readInt(), readInt(),
-        readInt(), readInt(), readInt(), readInt(), readInt()
+        readInt(), readInt(), readInt(), readInt(), readInt(),
       )
       bones = mutableListOf()
 
@@ -54,8 +54,8 @@ class ImmFile(bytes: ByteArray) {
             posDataOffset,
             rotDataOffset,
             scaleDataOffset,
-            unk3
-          )
+            unk3,
+          ),
         )
       }
 
@@ -164,7 +164,7 @@ class ImmFile(bytes: ByteArray) {
                 FrameInterpolation(
                   prevFrame,
                   nextFrame,
-                  (iteration + 1) / missingFrames.toFloat()
+                  (iteration + 1) / missingFrames.toFloat(),
                 )
             }
           }
@@ -188,7 +188,7 @@ if not blender_bone is None:
 $frameScript
 else:
     print ("WARN: No such bone '${bone.name}'")
-"""
+""",
       )
     }
 

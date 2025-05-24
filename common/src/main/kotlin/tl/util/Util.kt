@@ -78,8 +78,10 @@ fun createXdeltaPatch(
   streamHandler: PumpStreamHandler? = null,
 ) {
   execute(
-    xdeltaTool, workingDirectory = baseDir, streamHandler = streamHandler,
-    args = listOf("-9", "-S", "djw", "-B", bufSize, "-e", "-A", "-vfs", oldFile, newFile, patchOut)
+    xdeltaTool,
+    workingDirectory = baseDir,
+    streamHandler = streamHandler,
+    args = listOf("-9", "-S", "djw", "-B", bufSize, "-e", "-A", "-vfs", oldFile, newFile, patchOut),
   )
 }
 
@@ -91,8 +93,9 @@ fun createFinePatch(
   streamHandler: PumpStreamHandler? = null,
 ) {
   execute(
-    fineTool, streamHandler = streamHandler,
-    args = listOf("-encode", oldFile, newFile, patchOut)
+    fineTool,
+    streamHandler = streamHandler,
+    args = listOf("-encode", oldFile, newFile, patchOut),
   )
 }
 

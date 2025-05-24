@@ -17,14 +17,14 @@ class InDungeonTranslationProcessor(
   outDir: File,
   unitDir: File,
   private val textMeasure: TextMeasure,
-  private val warn: (String) -> Unit
+  private val warn: (String) -> Unit,
 ) {
   private val jsonDir = unitDir.child("json")
   private val translation = CccTranslation(
     unitDir.child("script-japanese.txt"),
     stripNewLine = false,
     replaceLiteralNewLine = false,
-    failOnLiteralNewLine = true
+    failOnLiteralNewLine = true,
   )
   private val unitTlEntries = translation.jpTexts.indices
     .map { idx ->

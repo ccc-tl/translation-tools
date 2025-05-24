@@ -57,8 +57,8 @@ class ExtraMiscScriptDumper(
             enEntry.l1,
             "$relPath\nskill index $index, skill line 1",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -66,8 +66,8 @@ class ExtraMiscScriptDumper(
             enEntry.l2,
             "$relPath\nskill index $index, skill line 2",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -75,8 +75,8 @@ class ExtraMiscScriptDumper(
             enEntry.l3,
             "$relPath\nskill index $index, skill line 3",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -84,8 +84,8 @@ class ExtraMiscScriptDumper(
             enEntry.l4,
             "$relPath\nskill index $index, skill line 4",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -93,8 +93,8 @@ class ExtraMiscScriptDumper(
             enEntry.l5,
             "$relPath\nskill index $index, skill line 5",
             relPath,
-            index
-          )
+            index,
+          ),
         )
       }
     }
@@ -117,8 +117,8 @@ class ExtraMiscScriptDumper(
             enEntry.name,
             "$relPath\nitem index $index, item name",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -126,8 +126,8 @@ class ExtraMiscScriptDumper(
             enEntry.description,
             "$relPath\nitem index $index, item description",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -135,8 +135,8 @@ class ExtraMiscScriptDumper(
             enEntry.trivia1,
             "$relPath\nitem index $index, item trivia 1",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -144,8 +144,8 @@ class ExtraMiscScriptDumper(
             enEntry.trivia2,
             "$relPath\nitem index $index, item trivia 2",
             relPath,
-            index
-          )
+            index,
+          ),
         )
       }
     }
@@ -168,8 +168,8 @@ class ExtraMiscScriptDumper(
             enEntry.name,
             "$relPath\nitem index $index, item name",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -177,8 +177,8 @@ class ExtraMiscScriptDumper(
             enEntry.description,
             "$relPath\nitem index $index, item description",
             relPath,
-            index
-          )
+            index,
+          ),
         )
         entries.add(
           TranslationEntry(
@@ -186,8 +186,8 @@ class ExtraMiscScriptDumper(
             enEntry.trivia,
             "$relPath\nitem index $index, item trivia",
             relPath,
-            index
-          )
+            index,
+          ),
         )
       }
     }
@@ -210,12 +210,12 @@ class ExtraMiscScriptDumper(
       "interface/shop/msg.bin",
       "interface/status/msg.bin",
       "battle/interface/btl_msg.bin",
-      "cmn/cmn_name.bin"
+      "cmn/cmn_name.bin",
     ).forEach { processFile(it, this::indexedTextBinHandler) }
 
     arrayOf(
       "interface/nameentry/msg.bin",
-      "interface/select/i_move.bin"
+      "interface/select/i_move.bin",
     ).forEach { processFile(it, this::fixedSizeTextBinHandler) }
 
     arrayOf(
@@ -230,7 +230,7 @@ class ExtraMiscScriptDumper(
       "interface/infomatrixex/infomatrix_rob_d_02.bin",
       "interface/infomatrixex/infomatrix_ryo_d_06.bin",
       "interface/infomatrixex/infomatrix_tam_d_00.bin",
-      "interface/infomatrixex/infomatrix_war_d_04.bin"
+      "interface/infomatrixex/infomatrix_war_d_04.bin",
     ).forEach { processFile(it, this::infoMatrixBinHandler) }
 
     arrayOf(
@@ -240,7 +240,7 @@ class ExtraMiscScriptDumper(
       ChrDatDesc("chr/mal/0000.dat", 0xD90, 0xD90, 7),
       ChrDatDesc("chr/ner/0000.dat", 0x2A08, 0x29EC, 106),
       ChrDatDesc("chr/sin/0000.dat", 0x130C, 0x130C, 10),
-      ChrDatDesc("chr/tam/0000.dat", 0x1EA4, 0x1E88, 96)
+      ChrDatDesc("chr/tam/0000.dat", 0x1EA4, 0x1E88, 96),
     ).forEach { chrDesc ->
       processFile(chrDesc.relPath) { relPath, jpFile, enFile ->
         addTocEntry(relPath, "in-dungeon")
@@ -338,8 +338,8 @@ class ExtraMiscScriptDumper(
           enEntry.title,
           "$relPath\nentry index $index, title",
           relPath,
-          index
-        )
+          index,
+        ),
       )
       entries.add(
         TranslationEntry(
@@ -347,8 +347,8 @@ class ExtraMiscScriptDumper(
           enEntry.abbreviation,
           "$relPath\nentry index $index, abbreviation",
           relPath,
-          index
-        )
+          index,
+        ),
       )
       entries.add(
         TranslationEntry(
@@ -356,8 +356,8 @@ class ExtraMiscScriptDumper(
           enEntry.text,
           "$relPath\nentry index $index, text",
           relPath,
-          index
-        )
+          index,
+        ),
       )
     }
   }
@@ -374,7 +374,7 @@ private data class ChrDatDesc(
   val relPath: String,
   val startEnAddr: Int,
   val startJpAddr: Int,
-  val textCount: Int
+  val textCount: Int,
 )
 
 private data class TranslationEntry(

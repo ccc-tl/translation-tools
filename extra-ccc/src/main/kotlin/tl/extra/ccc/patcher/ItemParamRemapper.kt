@@ -34,25 +34,25 @@ class ItemParam01Remapper(inBytes: ByteArray, outFile: File, translation: CccTra
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0x0
+        destPos = 0x0,
       )
       relocationOut.writeDatString(newName)
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0x5C
+        destPos = 0x5C,
       )
       relocationOut.writeDatString(newText1)
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0x8C
+        destPos = 0x8C,
       )
       relocationOut.writeDatString(newText2)
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0xBC
+        destPos = 0xBC,
       )
       relocationOut.writeDatString(newText3)
 
@@ -65,7 +65,7 @@ class ItemParam01Remapper(inBytes: ByteArray, outFile: File, translation: CccTra
     if (outBytes.size != EXPECTED_SIZE) {
       error(
         "Patched item_param_01.bin size mismatch, this is guaranteed to crash. " +
-          "Got ${outBytes.size.toHex()}, expected ${EXPECTED_SIZE.toHex()}."
+          "Got ${outBytes.size.toHex()}, expected ${EXPECTED_SIZE.toHex()}.",
       )
     }
     outFile.parentFile.mkdirs()
@@ -73,7 +73,7 @@ class ItemParam01Remapper(inBytes: ByteArray, outFile: File, translation: CccTra
 
     return TextRemapperResult(
       relocationOut.getAsByteArrayOutputStream().toByteArray(),
-      relocationSpaceStartAddress + relocationOut.pos()
+      relocationSpaceStartAddress + relocationOut.pos(),
     )
   }
 }
@@ -99,19 +99,19 @@ class ItemParam04Remapper(inBytes: ByteArray, outFile: File, translation: CccTra
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0
+        destPos = 0,
       )
       relocationOut.writeDatString(newName)
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0x50
+        destPos = 0x50,
       )
       relocationOut.writeDatString(newText1)
       arrayCopy(
         src = getTextRemapBytes(relocationSpaceStartAddress + relocationOut.pos()),
         dest = itemEntry.bytes,
-        destPos = 0x80
+        destPos = 0x80,
       )
       relocationOut.writeDatString(newText2)
 
@@ -121,14 +121,14 @@ class ItemParam04Remapper(inBytes: ByteArray, outFile: File, translation: CccTra
     if (outBytes.size != EXPECTED_SIZE) {
       error(
         "Patched item_param_04.bin size mismatch, this is guaranteed to crash. " +
-          "Got ${outBytes.size.toHex()}, expected ${EXPECTED_SIZE.toHex()}."
+          "Got ${outBytes.size.toHex()}, expected ${EXPECTED_SIZE.toHex()}.",
       )
     }
     outFile.writeBytes(outBytes)
 
     return TextRemapperResult(
       relocationOut.getAsByteArrayOutputStream().toByteArray(),
-      relocationSpaceStartAddress + relocationOut.pos()
+      relocationSpaceStartAddress + relocationOut.pos(),
     )
   }
 }

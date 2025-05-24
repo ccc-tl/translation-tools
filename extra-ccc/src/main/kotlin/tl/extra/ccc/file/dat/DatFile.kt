@@ -12,8 +12,8 @@ import java.io.PrintWriter
 import java.util.Locale
 
 class DatFile(
-  val file: File,
-  val outFile: File,
+  private val file: File,
+  private val outFile: File,
   manualFunctionsToParse: Array<Int> = emptyArray(),
   useCCC: Boolean = false,
   private val parseEventFunctions: Boolean = true,
@@ -35,30 +35,30 @@ class DatFile(
     cccMode,
     parseEventFunctions,
     findAllFunctionsMode,
-    aggressive
+    aggressive,
   )
 
-  val bytes = file.readBytes()
+  private val bytes = file.readBytes()
 
-  val output = PrintWriter(OutputStreamWriter(FileOutputStream(outFile), Charsets.UTF_8))
+  private val output = PrintWriter(OutputStreamWriter(FileOutputStream(outFile), Charsets.UTF_8))
 
-  val opcodeParser = if (useCCC) CccDatOpcodeParser(this, aggressive) else ExtraDatOpcodeParser(this)
+  private val opcodeParser = if (useCCC) CccDatOpcodeParser(this, aggressive) else ExtraDatOpcodeParser(this)
 
-  val functionEntryPoints = mutableListOf<FunctionEntryPoint>()
-  val functionEntryPointsToParse = mutableListOf<FunctionEntryPoint>()
-  val visitedAddresses = mutableListOf<Int>()
+  private val functionEntryPoints = mutableListOf<FunctionEntryPoint>()
+  private val functionEntryPointsToParse = mutableListOf<FunctionEntryPoint>()
+  private val visitedAddresses = mutableListOf<Int>()
 
-  val jumpBranches = mutableListOf<Int>()
-  val waitingJumpBranches = mutableListOf<Int>()
+  private val jumpBranches = mutableListOf<Int>()
+  private val waitingJumpBranches = mutableListOf<Int>()
 
-  val coverageTable = arrayOfNulls<Int?>(bytes.size)
-  var prevCoverageId = 0
-  val textPointers = mutableListOf<Int>()
+  private val coverageTable = arrayOfNulls<Int?>(bytes.size)
+  private var prevCoverageId = 0
+  private val textPointers = mutableListOf<Int>()
 
-  val dataBlocks = mutableListOf<Pair<Int, String>>()
-  val warning = mutableListOf<String>()
+  private val dataBlocks = mutableListOf<Pair<Int, String>>()
+  private val warning = mutableListOf<String>()
 
-  var currentLineInfo = "[---]"
+  private var currentLineInfo = "[---]"
 
   init {
     manualFunctionsToParse.forEach { addFunctionEntryPoint(FunctionEntryPoint(it, "mSub_")) }
@@ -297,7 +297,7 @@ class DatFile(
 </style>
 </head>
 <body>
-"""
+""",
     )
     val lineWidth = 16
     var currentLine = 0
@@ -377,7 +377,9 @@ class DatFile(
 }
 
 enum class FindAllFunctionsMode {
-  NONE, NORMAL, AGGRESSIVE
+  NONE,
+  NORMAL,
+  AGGRESSIVE,
 }
 
 fun getAscii(byte: Byte): Char {

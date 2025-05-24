@@ -96,7 +96,7 @@ class PhdSoundProcessor(private val vgmstreamTool: File) {
         execute(
           vgmstreamTool,
           args = listOf("-o", wavFile, vagFile),
-          streamHandler = nullStreamHandler()
+          streamHandler = nullStreamHandler(),
         )
         vagFile.delete()
       }

@@ -56,7 +56,8 @@ enum class GimImageFormat(val id: Int) {
   RGBA4444(2),
   RGBA8888(3),
   INDEX4(4),
-  INDEX8(5);
+  INDEX8(5),
+  ;
 
   companion object {
     fun forId(id: Int): GimImageFormat {
@@ -79,7 +80,8 @@ enum class GimImageFormat(val id: Int) {
 
 enum class GimPixelOrder(val id: Int) {
   NORMAL(0),
-  FASTER(1);
+  FASTER(1),
+  ;
 
   companion object {
     fun forId(id: Int): GimPixelOrder {

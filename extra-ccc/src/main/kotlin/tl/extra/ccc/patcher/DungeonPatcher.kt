@@ -21,7 +21,7 @@ class DungeonPatcher(
     ),
     6 to listOf(
       PakMobEntryUpdates(4, scaleYDelta),
-    )
+    ),
   )
 
   fun patchTo(outDir: File) {

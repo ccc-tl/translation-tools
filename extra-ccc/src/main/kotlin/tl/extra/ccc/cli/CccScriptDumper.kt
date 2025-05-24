@@ -29,7 +29,7 @@ fun main() {
     cccUnpack,
     cccToolkit.child("src/NPJH50505.BIN"),
     cccToolkit.child("src/translation/eboot/pointers.json"),
-    fateOutput.child("ccc-script-v3")
+    fateOutput.child("ccc-script-v3"),
   )
   println("Done")
 }
@@ -39,7 +39,7 @@ class CccScriptDumper(
   private val srcDir: File,
   private val ebootFile: File,
   private val ebootPointersFile: File,
-  private val outDir: File
+  private val outDir: File,
 ) {
   private val soundTable = parseCccSoundTable(ebootFile)
   private val entries = mutableListOf<Entry>()
@@ -268,8 +268,8 @@ class CccScriptDumper(
                   soundPtr = soundPtr,
                   soundId = soundId,
                   soundPath = soundPath,
-                  likelyFalsePositive = likelyFalsePositive
-                )
+                  likelyFalsePositive = likelyFalsePositive,
+                ),
               )
               matched++
             }
@@ -472,8 +472,8 @@ class CccScriptDumper(
           en = "",
           note = if (keepNotes) it.note else "",
           portrait = it.portrait,
-          audio = it.audio
-        )
+          audio = it.audio,
+        ),
       )
     }
     ScriptEditorFilesWriter(editorEntries).writeTo(unitOutDir)

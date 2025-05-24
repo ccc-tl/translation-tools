@@ -1,7 +1,7 @@
 package tl.util
 
 class WarningCollector(
-  private val logWarningsImmediately: Boolean = true
+  private val logWarningsImmediately: Boolean = true,
 ) {
   private val warnings = mutableListOf<String>()
 

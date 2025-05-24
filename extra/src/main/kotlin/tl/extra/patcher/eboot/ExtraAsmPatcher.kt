@@ -53,7 +53,7 @@ internal class ExtraAsmPatcher(private val nativeDir: File, pspSdkDir: File) {
     compileResult = nativeCodeCompiler.compile(
       patchBaseAddress = patchStart,
       outDir = nativeDir.child("out"),
-      srcFiles = nativeSrcFiles.map { nativeDir.child(it) }
+      srcFiles = nativeSrcFiles.map { nativeDir.child(it) },
     )
     writeElfSectionsInto(patchBytes, compileResult, virtualAddr)
     println("ASM patch will start at ${virtualAddr(patchBytes.size).toHex()}, overhead: ${patchBytes.size} bytes")

@@ -25,7 +25,7 @@ fun main() {
     cccUnpack,
     cccUnpack.child("field_new"),
     parseCccSoundTable(cccToolkit.child("src/NPJH50505.BIN")),
-    cccToolkit.child("src/translation/dat/script-japanese.txt")
+    cccToolkit.child("src/translation/dat/script-japanese.txt"),
   ).processTo(baseOut, createUpdatedNotes = false, createAudioAndPortraitText = true)
   println("Done")
 }
@@ -415,7 +415,7 @@ td, th {
     <th>Translated</th>
     <th>Notes</th>
     <th>Audio</th>
-  </tr>"""
+  </tr>""",
     )
 
     outEntries.sortedBy { it.scriptIndex }.forEach { entry ->
@@ -442,7 +442,7 @@ td, th {
     <td>${en.replace("\n", "<br>")}</td>
     <td>${note.replace("\n", "<br>")}</td>
     <td>${entry.soundPath ?: "-"}</td>
-  </tr>"""
+  </tr>""",
       )
     }
     htmlOut.append("""</table></body></html>""")

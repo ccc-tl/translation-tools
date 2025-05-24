@@ -22,11 +22,11 @@ class DialogPatcher(private val srcMob: File) {
     0 to listOf(
       // 32 * (7.5625 + 1.375) = 286
       PakMobEntryUpdates(0, listOf(0f, 0.157f)),
-      PakMobEntryUpdates(10, listOf(1.375f, 1.375f))
+      PakMobEntryUpdates(10, listOf(1.375f, 1.375f)),
       // 32 * (7.5625 + 1.1875) = 280
       // PakMobEntryUpdates(0, listOf(0f, 0.135f)),
       // PakMobEntryUpdates(10, listOf(1.1875f, 1.1875f))
-    )
+    ),
   )
 
   private fun patchBackgroundScale(outMob: File) {

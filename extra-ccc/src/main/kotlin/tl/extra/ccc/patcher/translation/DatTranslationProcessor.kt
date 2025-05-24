@@ -32,7 +32,7 @@ class DatTranslationProcessor(
   private val translationFile = unitDir.child("script-translation.txt")
   private val translation = CccTranslation(
     unitDir.child("script-japanese.txt"),
-    stripNewLine = true
+    stripNewLine = true,
   )
 
   private val cache by lazy {

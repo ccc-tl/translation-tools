@@ -25,7 +25,7 @@ fun tryPatchCpkInPlace(
           } else {
             null
           }
-        }
+        },
       )
     } catch (e: IOException) {
       val msg = e.message ?: throw e

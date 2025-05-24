@@ -33,7 +33,7 @@ class PmfStreamsIntoMkv(inputDir: File, outputDir: File) {
         execute(
           "ffmpeg",
           args = listOf("-i", file, "-i", audioFile, "-c:v", "copy", "-c:a", "flac", outputDir.child("$baseName.mkv")),
-          workingDirectory = outputDir
+          workingDirectory = outputDir,
         )
       }
   }

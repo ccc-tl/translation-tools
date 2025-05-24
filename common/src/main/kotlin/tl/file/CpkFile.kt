@@ -107,40 +107,53 @@ class CpkFile(val file: File, private val log: Log = Log()) {
           input.seek(patchInsertAbsOffset)
           input.write(patchedFile.readBytes())
           CpkPatchedFile(
-            relPath, newFileName,
-            fileOffset + tocOffset, fileSize, extractSize,
-            patchInsertAbsOffset, patchedFile.length().toInt()
+            relPath,
+            newFileName,
+            fileOffset + tocOffset,
+            fileSize,
+            extractSize,
+            patchInsertAbsOffset,
+            patchedFile.length().toInt(),
           )
         }
         log.info("Patching $relPath at ${fileOffset.toWHex()} using content at ${patch.offset.toWHex()}")
         arrayOf("FileSize", "ExtractSize").forEach { columnName ->
           patchUtf(
-            input, fileTable, index, columnName,
+            input,
+            fileTable,
+            index,
+            columnName,
             writer = { offset ->
               patch.writeNewSizeAt.add(offset)
               input.seek(offset)
               input.writeInt(patch.size)
-            }
+            },
           )
         }
         patchUtf(
-          input, fileTable, index, "FileOffset",
+          input,
+          fileTable,
+          index,
+          "FileOffset",
           writer = { offset ->
             patch.writeNewOffsetAt.add(offset)
             input.seek(offset)
             input.writeLong(patch.offset - tocOffset)
-          }
+          },
         )
         if (newFileName != null) {
           patchUtf(
-            input, fileTable, index, "FileName",
+            input,
+            fileTable,
+            index,
+            "FileName",
             writer = { offset ->
               input.seek(offset)
               val stringOffset = fileTable.baseOffset + input.readInt()
               patch.writeNewFileNameAt.add(stringOffset)
               input.seek(stringOffset)
               input.writeNullTerminatedString(newFileName)
-            }
+            },
           )
         }
       }

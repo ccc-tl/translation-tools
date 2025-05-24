@@ -3,19 +3,19 @@ package tl
 import kio.util.child
 import java.io.File
 
-private const val projectBaseVarName = "FE_PROJECT_BASE"
+private const val PROJECT_BASE_ENV = "FE_PROJECT_BASE"
 val projectBase by lazy {
-  getBaseDirectory(projectBaseVarName)
+  getBaseDirectory(PROJECT_BASE_ENV)
 }
 
-private const val pspSdkHomeVarName = "PSPSDK_HOME"
+private const val PSPSDK_HOME_ENV = "PSPSDK_HOME"
 val pspSdkHome by lazy {
-  getBaseDirectory(pspSdkHomeVarName).child("bin")
+  getBaseDirectory(PSPSDK_HOME_ENV).child("bin")
 }
 
-private const val ppssppHomeVarName = "PPSSPP_HOME"
+private const val PPSSPP_HOME_ENV = "PPSSPP_HOME"
 val ppssppHome by lazy {
-  getBaseDirectory(ppssppHomeVarName)
+  getBaseDirectory(PPSSPP_HOME_ENV)
 }
 
 private fun getBaseDirectory(varName: String): File {

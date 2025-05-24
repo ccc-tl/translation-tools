@@ -27,7 +27,7 @@ class PspImFile(val file: File) {
       val meshOffset = readInt()
       println(
         "$boneCount bones (at ${boneOffset.toWHex()}), $texCount textures (at ${texOffset.toWHex()}), " +
-          "$matCount materials (at ${matOffset.toWHex()}), $meshCount meshes (at ${meshOffset.toWHex()}), "
+          "$matCount materials (at ${matOffset.toWHex()}), $meshCount meshes (at ${meshOffset.toWHex()}), ",
       )
 
       setPos(texOffset)

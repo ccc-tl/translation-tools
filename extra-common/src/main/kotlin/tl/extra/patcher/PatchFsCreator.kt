@@ -81,8 +81,11 @@ class PatchFsCreator(
       }
       val patchFile = patchFsDir.child(it.deltaName)
       createFinePatch(
-        fineTool, it.orig, it.dest, patchFile,
-        streamHandler = nullStreamHandler()
+        fineTool,
+        it.orig,
+        it.dest,
+        patchFile,
+        streamHandler = nullStreamHandler(),
       )
       patchFsFiles[it.fsPath] = patchFile
     }
@@ -132,7 +135,7 @@ class PatchFsCreator(
           cccIsoBuildDir?.child("PSP_GAME/USRDIR/MOVIE/DEMO$num.PMF")
             ?: error("CCC ISO build dir must be set for CCC mode"),
           pmfOut,
-          streamHandler = nullStreamHandler()
+          streamHandler = nullStreamHandler(),
         )
         pmfPatchFsFiles["patch://DEMO$num.PMF"] = pmfOut
       }
@@ -146,5 +149,6 @@ class PatchFsCreator(
 }
 
 enum class PatchFsCreateMode {
-  EXTRA, CCC
+  EXTRA,
+  CCC,
 }

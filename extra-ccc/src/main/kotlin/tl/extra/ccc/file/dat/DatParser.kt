@@ -39,7 +39,11 @@ interface DatOpcodeParser {
 class FunctionEntryPoint(val addr: Int, val prefix: String = "sub_", val printAddr: Boolean = true)
 
 enum class DatParseState(val stop: Boolean) {
-  OK(false), FurtherAnalysisNeeded(false),
-  StopUnrecognizedOpcode(true), StopRecursionDetected(true), StopFunctionEnd(true), StopParserRequest(true),
-  ResumeGame(false)
+  OK(false),
+  FurtherAnalysisNeeded(false),
+  StopUnrecognizedOpcode(true),
+  StopRecursionDetected(true),
+  StopFunctionEnd(true),
+  StopParserRequest(true),
+  ResumeGame(false),
 }

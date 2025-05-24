@@ -50,8 +50,8 @@ class Mob2DFile(bytes: ByteArray) {
               color1 = readInt(),
               color2 = readInt(),
               renderMode = readInt(),
-              index = frameIndex
-            )
+              index = frameIndex,
+            ),
           )
         }
 
@@ -77,7 +77,7 @@ class Mob2DFile(bytes: ByteArray) {
         "filePos = ${filePos.toHex()}, time = $time, x = $posX, y = $posY, scaleX = $scaleX, scaleY = $scaleY, unkValue = $unkValue, " +
           "entryId = $entryId, color0 = ${color0.swapBytes().toWHex()}, color1 = ${color1.swapBytes().toWHex()}, " +
           "color2 = ${color2.swapBytes().toWHex()}, renderMode = ${renderMode.swapBytes().toWHex()}, " +
-          "rotZ = $rotZ, rotW = $rotW, rotX = $rotX, rotY = $rotY, index = $index"
+          "rotZ = $rotZ, rotW = $rotW, rotX = $rotX, rotY = $rotY, index = $index",
       )
     }
   }

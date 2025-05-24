@@ -71,8 +71,8 @@ class PalettedUnswizzler(val input: ByteArray, width: Int, bpp: Int, cctPresent:
       blocks.add(
         Block(
           blockIdx,
-          input.copyOfRange(blockStart, blockStart + blockSize)
-        )
+          input.copyOfRange(blockStart, blockStart + blockSize),
+        ),
       )
     }
 

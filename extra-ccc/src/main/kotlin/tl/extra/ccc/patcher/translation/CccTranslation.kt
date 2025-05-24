@@ -18,12 +18,18 @@ class CccTranslation(
   private val failOnLiteralNewLine: Boolean = false,
   safetyChecks: Boolean = true,
 ) : Translation(
-  jpFile, enFile, notesFile,
-  if (stripJpAndNotesNewLine) setOf(
-    PreProcessingOptions.StripJpNewLine,
-    PreProcessingOptions.StripNotesNewLine
-  ) else emptySet(),
-  overrides = overrides
+  jpFile,
+  enFile,
+  notesFile,
+  if (stripJpAndNotesNewLine) {
+    setOf(
+      PreProcessingOptions.StripJpNewLine,
+      PreProcessingOptions.StripNotesNewLine,
+    )
+  } else {
+    emptySet()
+  },
+  overrides = overrides,
 ) {
   init {
     if (safetyChecks) {
@@ -134,7 +140,7 @@ class CccTranslation(
     if (firstJpTextIndex != lastJpTextIndex && checkForAmbiguous) {
       println(
         "TL WARN: Ambiguous text found: '${jpText.replace("\n", "\\n")}', " +
-          "it exists at least at offsets ${firstJpTextIndex + 1} and ${lastJpTextIndex + 1}"
+          "it exists at least at offsets ${firstJpTextIndex + 1} and ${lastJpTextIndex + 1}",
       )
     }
     if (firstJpTextIndex == -1) {

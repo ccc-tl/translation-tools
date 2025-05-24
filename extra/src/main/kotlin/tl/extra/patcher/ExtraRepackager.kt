@@ -87,7 +87,7 @@ internal class ExtraRepackager(
     "extra-dat" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("dat")),
     "extra-misc" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("misc")),
     "extra-subs" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("subs")),
-    "extra-subs-se" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("subs-se"))
+    "extra-subs-se" to mapOf(ScriptWriteMode.COMPAT_TRANSLATED to translationDir.child("subs-se")),
   )
 
   fun buildAll(): PatchBuildResult {
@@ -138,11 +138,11 @@ internal class ExtraRepackager(
     MiscTranslationProcessor(extraUsPakExtract, srcDir, translationDir.child("misc"), imDir.child("misc"))
     val subs = ExtraTranslation(
       translationDir.child("subs/script-japanese-orig.txt"),
-      checkForAsciiOnly = true
+      checkForAsciiOnly = true,
     )
     val subsSe = ExtraTranslation(
       translationDir.child("subs-se/script-japanese.txt"),
-      checkForAsciiOnly = true
+      checkForAsciiOnly = true,
     )
     val seList = translationDir.child("subs-se/se-list.txt")
       .readLines()
@@ -150,7 +150,7 @@ internal class ExtraRepackager(
     SubsTranslationProcessor(
       nativeDir, subs, subsSe, seList,
       null, TextMeasure(8, warningCollector::warn),
-      publicBuild, ByteArray(0), warningCollector::warn
+      publicBuild, ByteArray(0), warningCollector::warn,
     )
   }
 
@@ -189,8 +189,8 @@ internal class ExtraRepackager(
     replacer.processReplacementGroup(
       "Maestro",
       listOf(
-        NameReplacementPattern("Praetor", "Maestro")
-      )
+        NameReplacementPattern("Praetor", "Maestro"),
+      ),
     )
     return replacer.getReplacements()
       .toMutableMap()
@@ -203,10 +203,10 @@ internal class ExtraRepackager(
               NameReplacementPatternResults("ruby.txb", listOf(0x0014FCF4 + ebootOffset)),
               NameReplacementPatternResults("ruby.bin", listOf(0x0014FD0C + ebootOffset), clearSize = 9),
               NameReplacementPatternResults("\u0009", listOf(0x000B0FC0 + ebootOffset), clearSize = 1),
-              NameReplacementPatternResults("\u0009", listOf(0x000B0FC8 + ebootOffset), clearSize = 1)
+              NameReplacementPatternResults("\u0009", listOf(0x000B0FC8 + ebootOffset), clearSize = 1),
             ),
-            pakFiles = emptyList()
-          )
+            pakFiles = emptyList(),
+          ),
         )
       }
   }
@@ -222,7 +222,7 @@ _C0 Memory debug mode
 _L 0x7$patchConfigByte0 0x00000002
 _C0 Hide subtitles
 _L 0x7$patchConfigByte0 0x00000004
-      """.trimIndent().replace("\n", "\r\n")
+      """.trimIndent().replace("\n", "\r\n"),
     )
   }
 

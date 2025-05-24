@@ -23,8 +23,11 @@ class ItemParam01BinFile(bytes: ByteArray) {
         with(KioInputStream(entryBytes)) itemParse@{
           val name = readDatString(maintainStreamPos = true)
           skip(0x54)
-          @Suppress("UNUSED_VARIABLE") val buyValue = readInt()
-          @Suppress("UNUSED_VARIABLE") val sellValue = readInt()
+          @Suppress("UNUSED_VARIABLE")
+          val buyValue = readInt()
+
+          @Suppress("UNUSED_VARIABLE")
+          val sellValue = readInt()
           val text1 = readDatString(maintainStreamPos = true)
           skip(0x30)
           val text2 = readDatString(maintainStreamPos = true)

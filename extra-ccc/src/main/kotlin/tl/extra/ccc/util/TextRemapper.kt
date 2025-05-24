@@ -4,20 +4,20 @@ import kio.KioOutputStream
 import kio.util.toWHex
 import java.io.ByteArrayOutputStream
 
-const val remapTextTemplate = "!rmap>!"
-const val remapRelativeTextTemplate = "!rmap>@"
-const val remapCompiledTextTemplate = "!rmap>#"
+const val REMAP_TEXT_TEMPLATE = "!rmap>!"
+const val REMAP_RELATIVE_TEXT_TEMPLATE = "!rmap>@"
+const val REMAP_COMPILED_TEXT_TEMPLATE = "!rmap>#"
 
 fun getTextRemapBytes(addr: Int): ByteArray {
-  return getTemplateRelocationBytes(remapTextTemplate, addr)
+  return getTemplateRelocationBytes(REMAP_TEXT_TEMPLATE, addr)
 }
 
 fun getTextRemapRelativeBytes(addr: Int): ByteArray {
-  return getTemplateRelocationBytes(remapRelativeTextTemplate, addr)
+  return getTemplateRelocationBytes(REMAP_RELATIVE_TEXT_TEMPLATE, addr)
 }
 
 fun getTextRemapCompiledBytes(addr: Int): ByteArray {
-  return getTemplateRelocationBytes(remapCompiledTextTemplate, addr)
+  return getTemplateRelocationBytes(REMAP_COMPILED_TEXT_TEMPLATE, addr)
 }
 
 private fun getTemplateRelocationBytes(template: String, addr: Int): ByteArray {

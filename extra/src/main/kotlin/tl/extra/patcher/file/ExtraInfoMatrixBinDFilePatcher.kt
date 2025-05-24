@@ -23,7 +23,7 @@ internal class ExtraInfoMatrixBinDFilePatcher(
       repeat(3) {
         val len = out.writeDatString(
           translation.getTranslation(entryCount, translationOffset, allowBlank = true),
-          charset = charset
+          charset = charset,
         )
         if (len > 0x20) {
           error("Too long translation text")
@@ -37,7 +37,7 @@ internal class ExtraInfoMatrixBinDFilePatcher(
       repeat(6) {
         val len = out.writeDatString(
           translation.getTranslation(entryCount, translationOffset, allowBlank = true),
-          charset = charset
+          charset = charset,
         )
         if (len > 0x80) {
           error("Too long translation text")

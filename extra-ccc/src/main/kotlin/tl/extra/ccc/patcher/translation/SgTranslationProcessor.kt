@@ -9,7 +9,7 @@ class SgTranslationProcessor(
   outDir: File,
   unitDir: File,
   textMeasure: TextMeasure,
-  warn: (String) -> Unit
+  warn: (String) -> Unit,
 ) :
   PatcherBasedProcessor(pakExtract, outDir, unitDir) {
   init {

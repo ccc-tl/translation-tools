@@ -52,7 +52,7 @@ private fun processPortraits(baseIn: File, baseOut: File, crop: Boolean) {
     "tam_2_2" to "tam_2",
     "tam_3_2" to "tam_3",
     "tam_4_2" to "tam_4",
-    "zin_2" to "zin"
+    "zin_2" to "zin",
   )
   baseIn.listFiles()!!.forEach { inDir ->
     println("Processing ${inDir.name}...")

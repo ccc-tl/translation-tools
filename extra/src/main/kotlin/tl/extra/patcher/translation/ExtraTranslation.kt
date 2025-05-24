@@ -12,13 +12,19 @@ internal class ExtraTranslation(
   overrides: Map<Int, String> = mapOf(),
   checkForAsciiOnly: Boolean = false,
 ) : Translation(
-  jpFile, enFile, notesFile,
-  if (stripNewLine) setOf(
-    PreProcessingOptions.StripJpNewLine,
-    PreProcessingOptions.StripEnNewLine,
-    PreProcessingOptions.StripNotesNewLine
-  ) else emptySet(),
-  overrides = overrides
+  jpFile,
+  enFile,
+  notesFile,
+  if (stripNewLine) {
+    setOf(
+      PreProcessingOptions.StripJpNewLine,
+      PreProcessingOptions.StripEnNewLine,
+      PreProcessingOptions.StripNotesNewLine,
+    )
+  } else {
+    emptySet()
+  },
+  overrides = overrides,
 ) {
   init {
     if (checkForAsciiOnly) {

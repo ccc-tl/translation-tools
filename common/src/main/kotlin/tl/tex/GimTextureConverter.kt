@@ -26,9 +26,10 @@ class GimTextureConverter(
           execute(
             gimConvTool,
             args = listOf(
-              it, "-o",
-              outDir.child("${it.relativizePath(srcDir).replace("/", "$")}.png")
-            )
+              it,
+              "-o",
+              outDir.child("${it.relativizePath(srcDir).replace("/", "$")}.png"),
+            ),
           )
           convertedCount++
         } else {
@@ -37,9 +38,10 @@ class GimTextureConverter(
           execute(
             gimConvTool,
             args = listOf(
-              gimFile, "-o",
-              outDir.child("${it.relativizePath(srcDir).replace("/", "$")}.png")
-            )
+              gimFile,
+              "-o",
+              outDir.child("${it.relativizePath(srcDir).replace("/", "$")}.png"),
+            ),
           )
           convertedCount++
           Files.move(gimFile.toPath(), it.toPath())

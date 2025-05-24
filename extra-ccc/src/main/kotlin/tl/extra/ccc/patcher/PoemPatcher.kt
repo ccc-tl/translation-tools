@@ -179,14 +179,14 @@ sealed class PoemUpdate {
     val structId: Int,
     val subStructId: Int,
     val delta: Int,
-    val subDelta: Int = delta
+    val subDelta: Int = delta,
   ) : PoemUpdate()
 
   class TextY(
     val structId: Int,
     val subStructId: Int,
     val delta: Int,
-    val subDelta: Int = delta
+    val subDelta: Int = delta,
   ) : PoemUpdate()
 
   class Light(
@@ -210,6 +210,6 @@ sealed class PoemUpdate {
   class WriteMobInt(
     val pakEntryId: Int,
     val entryOffset: Int,
-    val newValue: Int
+    val newValue: Int,
   ) : PoemUpdate()
 }

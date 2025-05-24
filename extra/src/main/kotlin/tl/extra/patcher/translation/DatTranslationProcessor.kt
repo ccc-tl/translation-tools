@@ -20,7 +20,7 @@ internal class DatTranslationProcessor(
   private val translation = ExtraTranslation(unitDir.child("script-japanese.txt"))
   private val translationOrig = ExtraTranslation(
     unitDir.child("script-japanese.txt"),
-    unitDir.child("script-translation-orig.txt")
+    unitDir.child("script-translation-orig.txt"),
   )
 
   init {
@@ -91,7 +91,7 @@ internal class DatTranslationProcessor(
       outFile,
       translation,
       translationOrig,
-      entries
+      entries,
     )
   }
 }

@@ -57,7 +57,7 @@ private fun burnSubsToAvi(rawIn: File, burnedOut: File, segmentTime: String, use
       println("Burning ${aviOut.name}...")
       val videoFilters = listOfNotNull(
         if (useSubs) "ass=${subsOut.name}" else null,
-        if (vflip) "vflip" else null
+        if (vflip) "vflip" else null,
       )
         .joinToString(separator = ",")
       execute(
@@ -71,10 +71,10 @@ private fun burnSubsToAvi(rawIn: File, burnedOut: File, segmentTime: String, use
           "-reset_timestamps", "1",
           "-f", "segment",
           "-pix_fmt", "bgr24",
-          aviOut
+          aviOut,
         ),
         workingDirectory = burnedOut,
-        streamHandler = nullStreamHandler()
+        streamHandler = nullStreamHandler(),
       )
       subsOut.delete()
     }

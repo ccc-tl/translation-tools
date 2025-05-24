@@ -11,6 +11,6 @@ fun startPpssppWithIso(iso: File) {
   execute(
     ppssppHome.child("PPSSPPWindows.exe"),
     args = listOf(iso),
-    streamHandler = nullStreamHandler()
+    streamHandler = nullStreamHandler(),
   )
 }

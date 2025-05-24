@@ -8,8 +8,9 @@ class Cct(val table: List<Int>, val chunkSize: Int) {
   fun isLinear(): Boolean {
     var lastChunk = 0
     table.forEach {
-      if (lastChunk != it)
+      if (lastChunk != it) {
         return false
+      }
       lastChunk++
     }
     return true

@@ -40,7 +40,7 @@ class CccSpellChecker(projectDir: File, outDir: File) {
       unit.enTexts.mapIndexedNotNull { index, enText ->
         val enStripped = stripControlCodes(
           enText,
-          replacement = " "
+          replacement = " ",
         )
         when {
           enStripped.isNotBlank() -> mapTextToSpellChecked(index, enStripped)
@@ -57,18 +57,18 @@ class CccSpellChecker(projectDir: File, outDir: File) {
         <meta charset="utf-8">
         <title>CCC Spell Check</title>
         ${
-      unitsMisspelling.entries.joinToString("\n") { unit ->
-        """
+        unitsMisspelling.entries.joinToString("\n") { unit ->
+          """
             <h1>${unit.key.parentFile.name}</h1>
             ${unit.value.joinToString("\n") { "<p>$it</p>" }}
           """
-      }
+        }
       }
       </head>
       <body>
       </body>
       </html>
-      """.trimIndent()
+      """.trimIndent(),
     )
 
     val summary = unitsMisspelling.map { "${it.key.parentFile.name}: ${it.value.size}" }

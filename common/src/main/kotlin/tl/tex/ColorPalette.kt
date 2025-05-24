@@ -115,6 +115,8 @@ class ColorPalette(val paletteBytes: ByteArray, val mode: Mode) {
   }
 
   enum class Mode {
-    RGBA8888, BGR565, GRAB4444
+    RGBA8888,
+    BGR565,
+    GRAB4444,
   }
 }

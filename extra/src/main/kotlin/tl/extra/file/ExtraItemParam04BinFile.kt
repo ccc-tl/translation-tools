@@ -35,8 +35,8 @@ internal class ExtraItemParam04BinFile(bytes: ByteArray, jpSize: Boolean) {
               buyValue = buyValue,
               sellValue = sellValue,
               description = desc,
-              trivia = trivia
-            )
+              trivia = trivia,
+            ),
           )
         }
       }

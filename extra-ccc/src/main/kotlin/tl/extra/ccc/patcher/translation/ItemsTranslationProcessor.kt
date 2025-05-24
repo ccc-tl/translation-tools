@@ -17,13 +17,13 @@ class ItemsTranslationProcessor(pakExtract: File, outDir: File, unitDir: File) {
       jp01Data,
       outDir.child("cmn/item_param_01.bin"),
       itemsTranslation,
-      0
+      0,
     )
     remapper04 = ItemParam04Remapper(
       jp04Data,
       outDir.child("cmn/item_param_04.bin"),
       itemsTranslation,
-      452
+      452,
     )
   }
 }

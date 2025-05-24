@@ -128,10 +128,11 @@ class NameReplacer(
           newFile.delete()
           pakFileResults.add(
             NameReplacementPakFileResults(
-              pakEntryOffset, oldBytes.size,
+              pakEntryOffset,
+              oldBytes.size,
               "patch-alt://$groupId-${patchFile.name}",
-              patchFile
-            )
+              patchFile,
+            ),
           )
         }
     }

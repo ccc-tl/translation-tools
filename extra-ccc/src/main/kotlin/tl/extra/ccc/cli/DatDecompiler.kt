@@ -17,9 +17,12 @@ private fun decompileCccDat(
   aggressive: Boolean = false,
 ) {
   DatFile(
-    cccUnpack.child(path), outName = path.replace("/", "_"),
-    cccMode = true, manualFunctionsToParse = manualFunctionPtrs, parseEventFunctions = parseEventFunctions,
+    cccUnpack.child(path),
+    outName = path.replace("/", "_"),
+    cccMode = true,
+    manualFunctionsToParse = manualFunctionPtrs,
+    parseEventFunctions = parseEventFunctions,
     aggressive = aggressive,
-    findAllFunctionsMode = if (aggressive) FindAllFunctionsMode.AGGRESSIVE else FindAllFunctionsMode.NONE
+    findAllFunctionsMode = if (aggressive) FindAllFunctionsMode.AGGRESSIVE else FindAllFunctionsMode.NONE,
   ).writeHtml()
 }

@@ -38,8 +38,8 @@ internal class ExtraItemParam01BinFile(bytes: ByteArray, jpSize: Boolean) {
               sellValue = sellValue,
               description = description,
               trivia1 = trivia1,
-              trivia2 = trivia2
-            )
+              trivia2 = trivia2,
+            ),
           )
         }
       }

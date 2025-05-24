@@ -13,7 +13,7 @@ import tl.util.readDatString
  */
 class CccDatOpcodeParser(
   private val ctx: DatParsingContext,
-  private val aggressive: Boolean = false
+  private val aggressive: Boolean = false,
 ) : DatOpcodeParser {
   override fun parseOpcode(input: KioInputStream, opcodeGroup: Int, opcode: Int): DatParseState {
     return when (opcodeGroup) {
@@ -303,7 +303,7 @@ class CccDatOpcodeParser(
     when (opcode) {
       0x00 -> {
         ctx.emit(
-          "bgm.opcode1100(${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)})"
+          "bgm.opcode1100(${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)})",
         )
       }
       0x01 -> {
@@ -420,7 +420,7 @@ class CccDatOpcodeParser(
       0x37 -> {
         ctx.emit(
           "3dModels.rotateCharsFacingEachOther(steps = ${fetchValue(input)}, model1Name = '${readDatString()}', " +
-            "model2Name = '${readDatString()}')"
+            "model2Name = '${readDatString()}')",
         )
       }
       0x3F -> {
@@ -456,7 +456,7 @@ class CccDatOpcodeParser(
       0x5D -> {
         ctx.emit(
           "3dModels.rotateObjectsFacingEachOther(model1Id? = ${fetchValue(input)}, steps = ${fetchValue(input)}, " +
-            "model2Name = '${readDatString()}')"
+            "model2Name = '${readDatString()}')",
         )
       }
       0x60 -> {
@@ -467,7 +467,7 @@ class CccDatOpcodeParser(
           "opcode1370(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
-            "'${readDatString()}')"
+            "'${readDatString()}')",
         )
       }
       0x71 -> {
@@ -475,7 +475,7 @@ class CccDatOpcodeParser(
           "paramMng.opcode1371(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
-            "${readInt().toWHex()})"
+            "${readInt().toWHex()})",
         )
       }
       0x73 -> {
@@ -494,7 +494,7 @@ class CccDatOpcodeParser(
         ctx.emit(
           "opcode1378(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
-            "${readInt().toWHex()}, '${readDatString()}')"
+            "${readInt().toWHex()}, '${readDatString()}')",
         )
       }
       0x7F -> {
@@ -509,7 +509,7 @@ class CccDatOpcodeParser(
       0xA1 -> {
         ctx.emit(
           "opcode13A1('${readDatString()}', ${readInt().toWHex()}, ${readFloat()}, ${readInt().toWHex()}, " +
-            "${readInt().toWHex()}, ${readInt().toWHex()})"
+            "${readInt().toWHex()}, ${readInt().toWHex()})",
         )
       }
       0xAB -> {
@@ -647,13 +647,13 @@ class CccDatOpcodeParser(
       0x0B -> {
         ctx.emit(
           "gField.field_54.setPointerToDatFunctionTable(pointerToDatFile = " +
-            "${readInt().datPtr(input, this@CccDatOpcodeParser::parseGFieldPosTable)})})"
+            "${readInt().datPtr(input, this@CccDatOpcodeParser::parseGFieldPosTable)})})",
         )
         return DatParseState.FurtherAnalysisNeeded
       }
       0x0E -> {
         ctx.emit(
-          "gField.field_58.setPointerToDat(pointerToDatFile = ${readInt().datPtr(input, this@CccDatOpcodeParser::parseGFieldTextTable)})})"
+          "gField.field_58.setPointerToDat(pointerToDatFile = ${readInt().datPtr(input, this@CccDatOpcodeParser::parseGFieldTextTable)})})",
         )
       }
       0x0F -> {
@@ -680,7 +680,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareSaveDataRelatedDialogPopup(datTextPtr = " +
-            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x51 -> {
@@ -695,13 +695,13 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareSaveRelatedDialogPopup(datTextPtr = " +
-            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x54 -> {
         ctx.emit(
           "gField.field_5C.setPointerToDat(pointerToDatFile = " +
-            "${readInt().datPtr(input, this@CccDatOpcodeParser::parseBackLogCallbackFunctions)})})"
+            "${readInt().datPtr(input, this@CccDatOpcodeParser::parseBackLogCallbackFunctions)})})",
         )
       }
       0x59 -> {
@@ -711,7 +711,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareItemReceivedGivenDialogPopup(arg = ${arg.toWHex()}, datTextPtr = " +
-            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+            "${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x5E -> {
@@ -720,7 +720,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareOneLineDialogYesNoChoice(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) " +
-            "[text: $text]"
+            "[text: $text]",
         )
       }
       0x5F -> {
@@ -732,7 +732,7 @@ class CccDatOpcodeParser(
         val text2 = input.readDatString(at = datTextPtr2, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareTwoLineDialogYesNoChoice(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}, " +
-            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]"
+            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]",
         )
       }
       0x60 -> {
@@ -740,7 +740,7 @@ class CccDatOpcodeParser(
         val datTextPtr = readInt()
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
-          "dialog.prepareOneLineDialogPopup(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+          "dialog.prepareOneLineDialogPopup(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x61 -> {
@@ -752,7 +752,7 @@ class CccDatOpcodeParser(
         val text2 = input.readDatString(at = datTextPtr2, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareTwoLineDialogPopup(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}, " +
-            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]"
+            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]",
         )
       }
       0x64 -> {
@@ -764,7 +764,7 @@ class CccDatOpcodeParser(
         val text2 = input.readDatString(at = datTextPtr2, maintainStreamPos = true)
         ctx.emit(
           "dialog.prepareSaveRelatedDialogPopup(datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}, " +
-            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]"
+            "datTextPtr2 = ${datTextPtr2.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text, text2: $text2]",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -877,7 +877,7 @@ class CccDatOpcodeParser(
       0x02 -> {
         ctx.emit(
           "opcode1A02(${fetchValue(input)}, ${fetchValue(input)}, ${readFloat()}, ${readFloat()}, ${readFloat()}, ${readInt()}, ${readInt()}, " +
-            "${readInt()}, '${readDatString()}')"
+            "${readInt()}, '${readDatString()}')",
         )
       }
       0x09 -> {
@@ -926,13 +926,13 @@ class CccDatOpcodeParser(
       0x64 -> {
         ctx.emit(
           "opcode1E64(${fetchValue(input)}, ${fetchValue(input)}, " +
-            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()})"
+            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()})",
         )
       }
       0x65 -> {
         ctx.emit(
           "opcode1E65(${fetchValue(input)}, ${fetchValue(input)}, " +
-            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()})"
+            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()})",
         )
       }
       0x68 -> {
@@ -992,7 +992,7 @@ class CccDatOpcodeParser(
         // renderTask.state = renderTask.state | ACTIVE
         ctx.emit(
           "renderTask.setTexture(structId = ${readInt().varBlockOrImm()}, textureId = ${readInt().varBlockOrImm()}, " +
-            "texRenderMode = ${readInt().varBlockOrImm()}, texRenderMode2 = ${readInt().varBlockOrImm()})"
+            "texRenderMode = ${readInt().varBlockOrImm()}, texRenderMode2 = ${readInt().varBlockOrImm()})",
         )
       }
       0x0B -> {
@@ -1037,13 +1037,13 @@ class CccDatOpcodeParser(
         // renderTask.pos{X,Y,Z}State = renderTask.pos{X,Y,Z}State | 0x8000
         ctx.emit(
           "renderTask.setPosition(structId = ${readInt().varBlockOrImm()}, xyzSelector = ${readInt().varBlockOrImm()}, " +
-            "pos = ${readInt().varBlockOrImm(printAsInteger = true)})"
+            "pos = ${readInt().varBlockOrImm(printAsInteger = true)})",
         )
       }
       0x01 -> {
         ctx.emit(
           "renderTask.opcode2101(structId = ${readInt().varBlockOrImm()}, xyzSelector = ${readInt().varBlockOrImm()}, " +
-            "v1 = ${readInt().varBlockOrImm(printAsInteger = true)}, v2 = ${readInt().varBlockOrImm(printAsInteger = true)})"
+            "v1 = ${readInt().varBlockOrImm(printAsInteger = true)}, v2 = ${readInt().varBlockOrImm(printAsInteger = true)})",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1068,7 +1068,7 @@ class CccDatOpcodeParser(
         // renderTask.animation_currentColor? = animation.fromColor
         ctx.emit(
           "renderTask.activateColorAnimation(structId = ${readInt().varBlockOrImm()}, animation_toColor = ${readInt().varBlockOrImm()}, " +
-            "animation_endTime = ${readInt().varBlockOrImm()})"
+            "animation_endTime = ${readInt().varBlockOrImm()})",
         )
       }
       0x03 -> {
@@ -1078,7 +1078,7 @@ class CccDatOpcodeParser(
         // renderTask.animation_currentColor? = animation.fromColor
         ctx.emit(
           "renderTask.activateColorAnimation(structId = ${readInt().varBlockOrImm()}, animation_toColor = ${readInt().varBlockOrImm()}, " +
-            "animation_endTime = ${readInt().varBlockOrImm()})"
+            "animation_endTime = ${readInt().varBlockOrImm()})",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1101,12 +1101,12 @@ class CccDatOpcodeParser(
         if (motionMode == 9) {
           ctx.emit(
             "renderTask.setMotion(structId = ${structId.varBlockOrImm()}, motionMode = ${motionMode.varBlockOrImm()}, " +
-              "datMotionControllerPtr = ${datMotionControllerPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)})"
+              "datMotionControllerPtr = ${datMotionControllerPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)})",
           )
         } else {
           ctx.emit(
             "renderTask.setMotion(structId = ${structId.varBlockOrImm()}, motionMode = ${motionMode.varBlockOrImm()}, " +
-              "datMotionControllerPtr = ${datMotionControllerPtr.datPtr(input, this@CccDatOpcodeParser::parseMobLikeEntries)})"
+              "datMotionControllerPtr = ${datMotionControllerPtr.datPtr(input, this@CccDatOpcodeParser::parseMobLikeEntries)})",
           )
         }
       }
@@ -1114,13 +1114,13 @@ class CccDatOpcodeParser(
         // this probably can't set motion data ptr to inside current dat file since datParser.fileBeginPtr is not accessed by opcode
         ctx.emit(
           "renderTask.setMotion(structId = ${readInt().varBlockOrImm()}, motionMode = ${readInt().varBlockOrImm()}, " +
-            "mobMotionControllerPtr = ${readInt().varBlockOrImm()})"
+            "mobMotionControllerPtr = ${readInt().varBlockOrImm()})",
         )
       }
       0x03 -> {
         ctx.emit(
           "renderTask.setMotion(structId = ${readInt().varBlockOrImm()}, motionMode = ${readInt().varBlockOrImm()}, " +
-            "mobMotionControllerPtr = ${readInt().varBlockOrImm()}, field_28 = ${readInt().varBlockOrImm()})"
+            "mobMotionControllerPtr = ${readInt().varBlockOrImm()}, field_28 = ${readInt().varBlockOrImm()})",
         )
       }
       0x04 -> {
@@ -1137,12 +1137,12 @@ class CccDatOpcodeParser(
         ctx.emit(
           "renderTask.update(structId = $structId, datMotionControllerPtr = " +
             "${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) " +
-            "[text: $text]"
+            "[text: $text]",
         )
       }
       0x0B -> {
         ctx.emit(
-          "renderTask(structId = ${readInt().toWHex()}).datMotionControllerPtr = *dynamicDAT(${fetchValue(input)})"
+          "renderTask(structId = ${readInt().toWHex()}).datMotionControllerPtr = *dynamicDAT(${fetchValue(input)})",
         )
       }
       0x0C -> {
@@ -1159,7 +1159,7 @@ class CccDatOpcodeParser(
         val textPtr = readInt()
         ctx.emit(
           "dialogBox.opcode2638(structNum = $structNum, " +
-            "datEntryPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseDialogRelatedEntries)})"
+            "datEntryPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseDialogRelatedEntries)})",
         )
       }
       0x39 -> {
@@ -1169,7 +1169,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = textPtr, maintainStreamPos = true)
         ctx.emit(
           "dialogBox.pushText(datTextPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}, lineWidth = $lineWidth) " +
-            "[text: ${text.replace("\n", " ")}]"
+            "[text: ${text.replace("\n", " ")}]",
         )
       }
       0x3A -> {
@@ -1178,13 +1178,13 @@ class CccDatOpcodeParser(
       0x40 -> {
         ctx.emit(
           "renderTask.opcode2640(structId = ${readInt().varBlockOrImm()}, ${readInt().subtract0x7FFFF00IfPossible()}, " +
-            "${readInt().subtract0x7FFFF00IfPossible()})"
+            "${readInt().subtract0x7FFFF00IfPossible()})",
         )
       }
       0x41 -> {
         ctx.emit(
           "renderTask(structId = ${readInt().varBlockOrImm()}).mobMotionControllerPtr.setTextLineRenderProperties(" +
-            "letterSpacing = ${readInt().varBlockOrImm()}, verticalLineSpacing = ${readInt().varBlockOrImm()})"
+            "letterSpacing = ${readInt().varBlockOrImm()}, verticalLineSpacing = ${readInt().varBlockOrImm()})",
         )
       }
       0x44 -> {
@@ -1206,13 +1206,13 @@ class CccDatOpcodeParser(
         // side: renderTask.motionMode = 0xA
         ctx.emit(
           "renderTask.linkExternalDatFile(structId = ${readInt().varBlockOrImm()}, " +
-            "datMotionControllerPtr=getExternalDatParserPtr(datId = ${readInt().varBlockOrImm()}, flag=${readInt().varBlockOrImm()}))"
+            "datMotionControllerPtr=getExternalDatParserPtr(datId = ${readInt().varBlockOrImm()}, flag=${readInt().varBlockOrImm()}))",
         )
       }
       0x05 -> {
         ctx.emit(
           "renderTask.get(structId = ${readInt().varBlockOrImm()}).datMotionControllerPtr.renderTasks.forEach " +
-            "{ it.texRenderMode2 = ${readInt().varBlockOrImm()} }"
+            "{ it.texRenderMode2 = ${readInt().varBlockOrImm()} }",
         )
       }
       0x0E -> {
@@ -1233,7 +1233,7 @@ class CccDatOpcodeParser(
       0x02 -> {
         ctx.emit(
           "renderTask.createAndLinkMobController(structId = ${readInt().varBlockOrImm()}, " +
-            "numberOfSubControllers = ${readInt().varBlockOrImm()})"
+            "numberOfSubControllers = ${readInt().varBlockOrImm()})",
         )
       }
       0x03 -> {
@@ -1242,13 +1242,13 @@ class CccDatOpcodeParser(
       0x04 -> {
         ctx.emit(
           "renderTask.updateMobSubController(structId = ${readInt().varBlockOrImm()}, subControllerId = ${readInt().varBlockOrImm()}, " +
-            "field_0 = ${readInt().varBlockOrImm()})"
+            "field_0 = ${readInt().varBlockOrImm()})",
         )
       }
       0x05 -> {
         ctx.emit(
           "renderTask.updateMobController(structNum = ${readInt().varBlockOrImm()}, mobEntry? = ${readInt().varBlockOrImm()}, " +
-            "enable = ${readInt().varBlockOrImm()})"
+            "enable = ${readInt().varBlockOrImm()})",
         )
       }
       0x06 -> {
@@ -1260,7 +1260,7 @@ class CccDatOpcodeParser(
       0x08 -> {
         ctx.emit(
           "renderTask.updateMobController(structNum = ${readInt().varBlockOrImm()}, " +
-            "field_0 = field_0 AND NOR(${readInt().varBlockOrImm()}, 0))"
+            "field_0 = field_0 AND NOR(${readInt().varBlockOrImm()}, 0))",
         )
       }
       0x09 -> {
@@ -1275,7 +1275,7 @@ class CccDatOpcodeParser(
       0x0C -> {
         ctx.emit(
           "renderTask.get(structNum = ${readInt().varBlockOrImm()}).mobMotionControllerPtr." +
-            "activateAnim_opcode290C(${readInt().varBlockOrImm()}, ${readInt().varBlockOrImm()})"
+            "activateAnim_opcode290C(${readInt().varBlockOrImm()}, ${readInt().varBlockOrImm()})",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1292,7 +1292,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = textPtr, maintainStreamPos = true)
         ctx.emit(
           "bpt.initAndSet(type = $arg, textPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) " +
-            "[text: $text] [type: 0 - move, 1 - search, 2 - talk]"
+            "[text: $text] [type: 0 - move, 1 - search, 2 - talk]",
         )
       }
       0x01 -> {
@@ -1320,7 +1320,7 @@ class CccDatOpcodeParser(
         val textPtr = readInt()
         val text = input.readDatString(at = textPtr, maintainStreamPos = true)
         ctx.emit(
-          "choice.prepareAnswer(id = $arg, $arg2, textPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+          "choice.prepareAnswer(id = $arg, $arg2, textPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x0B -> {
@@ -1346,7 +1346,7 @@ class CccDatOpcodeParser(
       }
       0x14 -> {
         ctx.emit(
-          "fieldBacklog.setDatDataBlock(pointerToDat = ${readInt().datPtr(input, this@CccDatOpcodeParser::parseBackLogStorageMemory)})"
+          "fieldBacklog.setDatDataBlock(pointerToDat = ${readInt().datPtr(input, this@CccDatOpcodeParser::parseBackLogStorageMemory)})",
         )
       }
       0x15 -> {
@@ -1357,7 +1357,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = textPtr, maintainStreamPos = true)
         ctx.emit(
           "fieldBacklog.pushText(datTextPtr = ${textPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}, " +
-            "letterSpacing = $letterSpacing, entryId? = $entryId) [text: ${text.replace("\n", " ")}]"
+            "letterSpacing = $letterSpacing, entryId? = $entryId) [text: ${text.replace("\n", " ")}]",
         )
       }
       0x16 -> {
@@ -1420,7 +1420,7 @@ class CccDatOpcodeParser(
         val text = input.readDatString(at = datTextPtr, maintainStreamPos = true)
         ctx.emit(
           "inDungeonDialog_pushText?(arg = ${arg.toWHex()}, arg2 = ${arg2.toWHex()}, arg3 = ${arg3.toWHex()}," +
-            " datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]"
+            " datTextPtr = ${datTextPtr.datPtr(input, this@CccDatOpcodeParser::parseShiftJisText)}) [text: $text]",
         )
       }
       0x52 -> {
@@ -1524,7 +1524,7 @@ class CccDatOpcodeParser(
         ctx.emit(
           "opcode3510_effectPlay??(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
             "${readInt().toWHex()}, ${readInt().toWHex()}, " +
-            "${readInt().toWHex()}, '${readDatString()}')"
+            "${readInt().toWHex()}, '${readDatString()}')",
         )
       }
       0x13 -> {
@@ -1580,7 +1580,7 @@ class CccDatOpcodeParser(
       }
       0x32 -> {
         ctx.emit(
-          "gField.opcode3532(${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)})"
+          "gField.opcode3532(${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)}, ${fetchValue(input)})",
         )
       }
       0x35 -> {
@@ -1604,7 +1604,7 @@ class CccDatOpcodeParser(
       0x45 -> {
         ctx.emit(
           "quest.opcode3545(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
-            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, '${readDatString()}')"
+            "${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, '${readDatString()}')",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1723,7 +1723,7 @@ class CccDatOpcodeParser(
   private fun parseDialogRelatedEntries(text: StringBuilder, input: KioInputStream): Unit = with(input) {
     text.appendLine(
       "DialogRelatedEntry(${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, ${readInt().toWHex()}, " +
-        "${readInt().toWHex()}, ${readInt().toWHex()})"
+        "${readInt().toWHex()}, ${readInt().toWHex()})",
     )
   }
 
@@ -1734,7 +1734,7 @@ class CccDatOpcodeParser(
     val unk3 = readShort().toInt()
     text.appendLine(
       "MobLikeHeader(unk1 = ${unk1.toWHex()}, count = ${count.toWHex()}, unk2(textureId?) = " +
-        "${unk2.toWHex()}, unk3(time?) = ${unk3.toWHex()})"
+        "${unk2.toWHex()}, unk3(time?) = ${unk3.toWHex()})",
     )
     if (count == 0) {
       return
@@ -1765,7 +1765,7 @@ class CccDatOpcodeParser(
     val unk7 = readInt()
     text.appendLine(
       "BacklogHeader(unk1 = ${unk1.toWHex()}, maxEntries = ${maxEntries.toWHex()}, unk2 = ${unk2.toWHex()}, unk3 = ${unk3.toWHex()}, " +
-        "lineWidth = ${lineWidth.toWHex()}, unk4 = ${unk4.toWHex()}, unk5 = ${unk5.toWHex()}, unk6 = ${unk6.toWHex()}, unk7 = ${unk7.toWHex()})"
+        "lineWidth = ${lineWidth.toWHex()}, unk4 = ${unk4.toWHex()}, unk5 = ${unk5.toWHex()}, unk6 = ${unk6.toWHex()}, unk7 = ${unk7.toWHex()})",
     )
     var skippedEmptyEntries = 0
     repeat(maxEntries) {

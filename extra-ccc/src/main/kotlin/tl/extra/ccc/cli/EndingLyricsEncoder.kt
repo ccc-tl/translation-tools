@@ -9,7 +9,7 @@ import kotlin.math.roundToInt
 
 fun main() {
   EndingLyricsEncoder(
-    cccToolkit.child("src/ending-lyrics.srt")
+    cccToolkit.child("src/ending-lyrics.srt"),
   ).encode()
   println("Done")
 }
@@ -29,7 +29,7 @@ class EndingLyricsEncoder(private val lyricsFile: File) {
         LyricsLine(
           (timeFormat.parse(timeParts[0]).time / FRAME_DURATION_MILLIS).roundToInt(),
           (timeFormat.parse(timeParts[1]).time / FRAME_DURATION_MILLIS).roundToInt(),
-          it[2]
+          it[2],
         )
       }
       .sortedBy { it.startFrames }
@@ -63,6 +63,6 @@ class EndingLyricsEncoder(private val lyricsFile: File) {
   private data class LyricsLine(
     val startFrames: Int,
     val endFrames: Int,
-    val textLine: String
+    val textLine: String,
   )
 }

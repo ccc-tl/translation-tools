@@ -28,7 +28,7 @@ internal class MiscTranslationProcessor(
   private val translation = ExtraTranslation(unitDir.child("script-japanese.txt"))
   private val translationOrig = ExtraTranslation(
     unitDir.child("script-japanese.txt"),
-    unitDir.child("script-translation-orig.txt")
+    unitDir.child("script-translation-orig.txt"),
   )
 
   init {
@@ -112,16 +112,22 @@ internal class MiscTranslationProcessor(
   private fun patchSjisFile(
     path: String,
     translationOffset: Int,
-    charset: Charset = Charsets.WINDOWS_932
+    charset: Charset = Charsets.WINDOWS_932,
   ) {
     patchFile(
-      path, translationOffset, charset,
+      path,
+      translationOffset,
+      charset,
       handler = { bytes, file, translation, offset, hCharset ->
         ExtraSjisFilePatcher(
-          bytes, srcDir.child("chaDataTbl-jp.sjis").readBytes(),
-          file, translation, offset, hCharset
+          bytes,
+          srcDir.child("chaDataTbl-jp.sjis").readBytes(),
+          file,
+          translation,
+          offset,
+          hCharset,
         )
-      }
+      },
     )
   }
 
@@ -144,7 +150,7 @@ internal class MiscTranslationProcessor(
   private fun patchTextBinFile(
     path: String,
     translationOffset: Int,
-    charset: Charset = Charsets.WINDOWS_932
+    charset: Charset = Charsets.WINDOWS_932,
   ) {
     patchFile(path, translationOffset, charset, ::ExtraIndexedTextBinFilePatcher)
   }
@@ -173,10 +179,12 @@ internal class MiscTranslationProcessor(
     charset: Charset = Charsets.WINDOWS_932,
   ) {
     patchFile(
-      path, translationOffset, charset,
+      path,
+      translationOffset,
+      charset,
       handler = { bytes, file, translation, offset, hCharset ->
         ExtraChrDatFilePatcher(bytes, file, translation, translationOrig, offset, count, hCharset)
-      }
+      },
     )
   }
 

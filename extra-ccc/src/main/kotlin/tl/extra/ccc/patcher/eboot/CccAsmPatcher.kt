@@ -29,7 +29,7 @@ import java.time.LocalDateTime
 class CccAsmPatcher(private val publicBuild: Boolean = false, private val nativeDir: File, pspSdkDir: File) {
   private val nativeCodeCompiler = pspCodeCompiler(pspSdkDir)
   private val nativeSrcFiles = listOf(
-    "bb.cpp", "infomatrix.cpp", "patch.cpp", "generated.cpp", "subs.cpp", "subs_draw.cpp", "hook.cpp", "game.cpp", "platform.cpp", "util.cpp"
+    "bb.cpp", "infomatrix.cpp", "patch.cpp", "generated.cpp", "subs.cpp", "subs_draw.cpp", "hook.cpp", "game.cpp", "platform.cpp", "util.cpp",
   )
   private var vars = PatchVars()
   private var funcs = PatchFuncs()
@@ -82,7 +82,7 @@ class CccAsmPatcher(private val publicBuild: Boolean = false, private val native
       patchBaseAddress = patchStart,
       outDir = nativeDir.child("out"),
       srcFiles = nativeSrcFiles.map { nativeDir.child(it) },
-      additionalGccFlags = listOf("-D", "MODE_CCC=1")
+      additionalGccFlags = listOf("-D", "MODE_CCC=1"),
     )
     writeElfSectionsInto(patchBytes, compileResult, virtualAddr)
 

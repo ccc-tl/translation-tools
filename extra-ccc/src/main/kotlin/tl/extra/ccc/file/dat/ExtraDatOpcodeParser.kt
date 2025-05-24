@@ -95,7 +95,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
 
         ctx.emit(
           "iesCmd1ControlStructureOperation_prepareNested(structNum = fetchValue(${getMemoryMode.toWHex()}, " +
-            "${getMemoryArg.toWHex()}), addr = ${addr.toWHex()})"
+            "${getMemoryArg.toWHex()}), addr = ${addr.toWHex()})",
         )
         ctx.addJumpBranch(addr)
       }
@@ -105,7 +105,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
 
         ctx.emit(
           "iesCmd1ControlStructureOperation_forkNested?(structNum = fetchValue(${getMemoryMode.toWHex()}, " +
-            "${getMemoryArg.toWHex()})) [is structNum relative?]"
+            "${getMemoryArg.toWHex()})) [is structNum relative?]",
         )
       }
       0x0F -> {
@@ -182,7 +182,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "conditionalRelativeJump(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
             "offset1 = ${offset1.toWHex()}, offset2 = ${offset1.toWHex()}, offset3 = ${offset1.toWHex()}, offset4 = ${offset1.toWHex()}, " +
-            "arg1 = ${arg1.toWHex()}, arg2 = ${arg2.toWHex()}"
+            "arg1 = ${arg1.toWHex()}, arg2 = ${arg2.toWHex()}",
         )
         ctx.emitWarning("Can't calculate conditional jump offset, some script data might not be processed")
       }
@@ -201,7 +201,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "updateDatParserField70AndField74(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) - " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x01 -> {
@@ -211,7 +211,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "updateMemoryValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, " +
-            "newValue = fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()})) [side: new value in field_70 and field_74]"
+            "newValue = fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()})) [side: new value in field_70 and field_74]",
         )
       }
       0x02 -> {
@@ -221,7 +221,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "updateDatParserField70AndField74(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) AND " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x03 -> {
@@ -231,7 +231,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "updateDatParserField70AndField74AndMemoryValue(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) AND " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x04 -> {
@@ -243,7 +243,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "updateMemoryValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, " +
             "newValue = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) OR fetchValue(${getMemoryMode2.toWHex()}, " +
             "${getMemoryArg2.toWHex()})) " +
-            "[side: new value in field_70 and field_74]"
+            "[side: new value in field_70 and field_74]",
         )
       }
       0x07 -> {
@@ -255,7 +255,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "updateMemoryValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, " +
             "newValue = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) + (ADDU) fetchValue(${getMemoryMode2.toWHex()}, " +
             "${getMemoryArg2.toWHex()})) " +
-            "[side: new value in field_70 and field_74]"
+            "[side: new value in field_70 and field_74]",
         )
       }
       0x0C -> {
@@ -267,7 +267,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "updateMemoryValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, " +
             "newValue = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}) AND (NOT fetchValue(${getMemoryMode2.toWHex()}, " +
             "${getMemoryArg2.toWHex()}))) " +
-            "[side: new value in field_70 and field_74]"
+            "[side: new value in field_70 and field_74]",
         )
       }
       0x15 -> {
@@ -277,7 +277,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode0215_floats(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, ${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()})"
+            "${getMemoryArg2.toWHex()})",
         )
       }
       0x17 -> {
@@ -287,7 +287,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode0217(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}, ${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()})"
+            "${getMemoryArg2.toWHex()})",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -347,7 +347,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateParserVariableBlockValue_set(newValue = varBlockOrImm(${arg1.toWHex()}), " +
-            "fieldNumber = ${(arg2 - 0x7FFFFF00).toWHex()}) [raw fieldNumber: ${arg2.toWHex()}]"
+            "fieldNumber = ${(arg2 - 0x7FFFFF00).toWHex()}) [raw fieldNumber: ${arg2.toWHex()}]",
         )
       }
       0x01 -> {
@@ -355,7 +355,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateParserVariableBlockValue_addUnsigned(addedValue = varBlockOrImm(${arg1.toWHex()}), " +
-            "fieldNumber = ${(arg2 - 0x7FFFFF00).toWHex()}) [raw fieldNumber: ${arg2.toWHex()}]"
+            "fieldNumber = ${(arg2 - 0x7FFFFF00).toWHex()}) [raw fieldNumber: ${arg2.toWHex()}]",
         )
       }
       0x03 -> {
@@ -363,7 +363,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "opcode0403(arg1 = varBlockOrImm(${arg1.toWHex()}), arg2 = ${(arg2 - 0x7FFFFF00).toWHex()}) " +
-            "[raw fieldNumber: ${arg2.toWHex()}]"
+            "[raw fieldNumber: ${arg2.toWHex()}]",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -403,7 +403,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val bytes = readBytes(0x2C).joinToString(separator = "", transform = { it.toWHex() })
         ctx.emit(
           "opcode0F06_setupIesPSPModelPacketRelated(fetchValue(${getMemoryMode.toWHex()}, " +
-            "${getMemoryArg.toWHex()}), $string, $bytes)"
+            "${getMemoryArg.toWHex()}), $string, $bytes)",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -423,7 +423,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg = readInt()
         ctx.emit(
           "updateDatParserField70andField74(getValue(base = 0x3D81F8, which = fetchValue?(${getMemoryMode.toWHex()}, " +
-            "${getMemoryArg.toWHex()})))"
+            "${getMemoryArg.toWHex()})))",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -447,7 +447,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "opcode1100_BGMRelated(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
             "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), " +
-            "fetchValue(${getMemoryMode4.toWHex()}, ${getMemoryArg4.toWHex()}))"
+            "fetchValue(${getMemoryMode4.toWHex()}, ${getMemoryArg4.toWHex()}))",
         )
       }
       0x01 -> {
@@ -457,7 +457,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1101(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}))"
+            "${getMemoryArg2.toWHex()}))",
         )
       }
       0x14 -> {
@@ -485,7 +485,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.emit(
           "opcode1121(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
-            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}))"
+            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}))",
         )
       }
       0x23 -> {
@@ -533,7 +533,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.emit(
           "opcode1309_loadCharacter?(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
-            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), '$modelName')"
+            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), '$modelName')",
         )
       }
       0x0F -> {
@@ -560,7 +560,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "opcode1311_loadCharacterRelated?(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
             "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), fetchValue(${getMemoryMode4.toWHex()}, " +
-            "${getMemoryArg4.toWHex()}))"
+            "${getMemoryArg4.toWHex()}))",
         )
       }
       0x13 -> {
@@ -571,7 +571,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val string = readDatString()
         ctx.emit(
           "opcode1313(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}), '$string')"
+            "${getMemoryArg2.toWHex()}), '$string')",
         )
       }
       0x14 -> {
@@ -588,7 +588,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val string = readDatString()
         ctx.emit(
           "opcode1315(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}), '$string')"
+            "${getMemoryArg2.toWHex()}), '$string')",
         )
       }
       0x16 -> {
@@ -599,7 +599,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val string = readDatString()
         ctx.emit(
           "opcode1316(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}), '$string')"
+            "${getMemoryArg2.toWHex()}), '$string')",
         )
       }
       0x17 -> {
@@ -610,7 +610,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val string = readDatString()
         ctx.emit(
           "opcode1317(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}), '$string')"
+            "${getMemoryArg2.toWHex()}), '$string')",
         )
       }
       0x18 -> {
@@ -634,7 +634,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.emit(
           "opcode131E(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
             "${getMemoryArg2.toWHex()}), " +
-            "'$modelName')"
+            "'$modelName')",
         )
       }
       0x1F -> {
@@ -648,7 +648,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.emit(
           "opcode131F(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
             "${getMemoryArg2.toWHex()}), " +
-            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), '$modelName')"
+            "fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), '$modelName')",
         )
       }
       0x21 -> {
@@ -819,7 +819,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1602(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}))"
+            "${getMemoryArg2.toWHex()}))",
         )
       }
       0x05 -> {
@@ -834,7 +834,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
           "updateGlobalFieldDatFileTable(slot = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
             "tableEntry.field0 = fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), " +
             "tableEntry.field4 = fetchValue(${getMemoryMode3.toWHex()}, ${getMemoryArg3.toWHex()}), " +
-            "tableEntry.path = $path)"
+            "tableEntry.path = $path)",
         )
       }
       0x07 -> {
@@ -855,7 +855,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1610_gFieldUpdateField0x260(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x14 -> {
@@ -867,7 +867,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg = readInt()
         ctx.emit(
           "getPointerToCFieldInstance(unknown = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()})) " +
-            "[side: pointer in field_70 and field_74"
+            "[side: pointer in field_70 and field_74",
         )
       }
       0x1F -> {
@@ -897,7 +897,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1628(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}))"
+            "${getMemoryArg2.toWHex()}))",
         )
       }
       0x29 -> {
@@ -920,7 +920,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1632(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), fetchValue(${getMemoryMode2.toWHex()}, " +
-            "${getMemoryArg2.toWHex()}))"
+            "${getMemoryArg2.toWHex()}))",
         )
       }
       0x37 -> {
@@ -983,7 +983,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1764_updateSomeGlobalValue??(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "a2 = fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "a2 = fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x65 -> {
@@ -998,7 +998,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode_1766_updateSaveField?(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x67 -> {
@@ -1045,7 +1045,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1832(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x33 -> {
@@ -1063,7 +1063,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1838_modelHandsManip(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x3B -> {
@@ -1073,7 +1073,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode183B_3dModels(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
 
@@ -1092,7 +1092,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val modelName = readDatString()
         ctx.emit(
           "loadModel_gObj(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), '$modelName')"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), '$modelName')",
         )
       }
       0x1D -> {
@@ -1106,7 +1106,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg6 = readInt()
         ctx.emit(
           "opcode1A1D(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), ${arg1.toWHex()}, " +
-            "${arg2.toWHex()}, ${arg3.toWHex()}, ${arg4.toWHex()}, ${arg5.toWHex()}, ${arg6.toWHex()})"
+            "${arg2.toWHex()}, ${arg3.toWHex()}, ${arg4.toWHex()}, ${arg5.toWHex()}, ${arg6.toWHex()})",
         )
       }
       0x1E -> {
@@ -1151,7 +1151,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg7 = readInt()
         ctx.emit(
           "opcode1E64(${arg1.toWHex()}, ${arg2.toWHex()}, ${arg3.toWHex()}, ${arg4.toWHex()}, ${arg5.toWHex()}, " +
-            "${arg6.toWHex()}, ${arg7.toWHex()})"
+            "${arg6.toWHex()}, ${arg7.toWHex()})",
         )
       }
       0x65 -> {
@@ -1164,7 +1164,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg7 = readInt()
         ctx.emit(
           "opcode1E65(${arg1.toWHex()}, ${arg2.toWHex()}, ${arg3.toWHex()}, ${arg4.toWHex()}, ${arg5.toWHex()}, " +
-            "${arg6.toWHex()}, ${arg7.toWHex()})"
+            "${arg6.toWHex()}, ${arg7.toWHex()})",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1191,7 +1191,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg2 = readInt()
         ctx.emit(
           "opcode1F02_freeHeap?(fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()}), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}))",
         )
       }
       0x0C -> {
@@ -1233,7 +1233,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.emit(
           "updateRenderTask_activateTexture(structNum = ${structNum.toWHex()}, textureId = ${arg1.toWHex()}, " +
             "someTexRenderMode? = ${arg2.toWHex()}, " +
-            "someTexRenderMode2? = ${arg3.toWHex()}) [side: state = state | ACTIVE]"
+            "someTexRenderMode2? = ${arg3.toWHex()}) [side: state = state | ACTIVE]",
         )
       }
       0x0B -> {
@@ -1245,7 +1245,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg1 = readInt()
         ctx.emit(
           "updateRenderTask_activateTexture(structNum = ${structNum.toWHex()}, " +
-            "textureId = ${arg1.toWHex()}) [side: state = state | ACTIVE]"
+            "textureId = ${arg1.toWHex()}) [side: state = state | ACTIVE]",
         )
       }
       0x0E -> {
@@ -1258,7 +1258,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg1 = readInt()
         ctx.emit(
           "updateRenderTask(structNum = varBlockOrImm(${structNum.toWHex()}), " +
-            "fieldC = varBlockOrImm(${arg1.toWHex()}))  [side: state = state | ACTIVE]"
+            "fieldC = varBlockOrImm(${arg1.toWHex()}))  [side: state = state | ACTIVE]",
         )
       }
       0x11 -> {
@@ -1274,7 +1274,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val texId = readInt()
         ctx.emit(
           "updateRenderTask_activateTexture(structNum = varBlockOrImm(${structNum.toWHex()}), " +
-            "newTexId = varBlockOrImm(${texId.toWHex()}))"
+            "newTexId = varBlockOrImm(${texId.toWHex()}))",
         )
       }
       0x14 -> {
@@ -1294,7 +1294,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateRenderTask_updatePosition(structNum = ${structNum.toWHex()}, xyzSelector = " +
-            "${arg1.toWHex()}, value = ${arg2.toWHex()} (as Int: $arg2)) [side: state = state | DIRTY, field_48+offset = field_48+offset OR 0x8000]"
+            "${arg1.toWHex()}, value = ${arg2.toWHex()} (as Int: $arg2)) [side: state = state | DIRTY, field_48+offset = field_48+offset OR 0x8000]",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1316,7 +1316,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateRenderTask(structNum = ${structNum.toWHex()}, animation_toColor = ${arg1.toWHex()}, animation_endTime = ${arg2.toWHex()}) " +
-            "[side: animation_currentTime? = 0, animation_enable = (animation_enable & 0xFFFFFFF0) OR 0x1, state = state | ACTIVE)"
+            "[side: animation_currentTime? = 0, animation_enable = (animation_enable & 0xFFFFFFF0) OR 0x1, state = state | ACTIVE)",
         )
       }
       0x03 -> {
@@ -1344,7 +1344,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val ptr = readInt()
         ctx.emit(
           "updateRenderTask(structNum = ${structNum.toWHex()}, someRenderMode? = ${arg1.toWHex()}, " +
-            "field_1C_masterPosStruct = ${ptr.toWHex()} [pointerToTableInDATFile?])"
+            "field_1C_masterPosStruct = ${ptr.toWHex()} [pointerToTableInDATFile?])",
         )
       }
       0x02 -> {
@@ -1360,7 +1360,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg3 = readInt()
         ctx.emit(
           "updateRenderTask(structNum = ${structNum.toWHex()}, someRenderMode? = ${arg1.toWHex()}, " +
-            "someWidth = ${arg2.toWHex()}, someHeight = ${arg3.toWHex()})"
+            "someWidth = ${arg2.toWHex()}, someHeight = ${arg3.toWHex()})",
         )
       }
       0x04 -> {
@@ -1416,7 +1416,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg3 = readInt()
         ctx.emit(
           "opcode2640(arg1 = varBlockOrImm(${arg1.toWHex()}), arg2 = varBlockOrImm(${arg2.toWHex()}), " +
-            "arg3 = varBlockOrImm(${arg3.toWHex()}))"
+            "arg3 = varBlockOrImm(${arg3.toWHex()}))",
         )
       }
       0x41 -> {
@@ -1425,7 +1425,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg3 = readInt()
         ctx.emit(
           "opcode2641_animRelated(structNum = varBlockOrImm(${structNum.toWHex()}), arg2 = ${arg2.toWHex()}, " +
-            "arg3 = ${arg3.toWHex()})"
+            "arg3 = ${arg3.toWHex()})",
         )
       }
       0x44 -> {
@@ -1449,7 +1449,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg3 = readInt()
         ctx.emit(
           "updateRenderTask_linkDATFile(structNum = ${structNum.toWHex()}, datFileId=${arg2.toWHex()}, " +
-            "getPointerToDatFileFlag=${arg3.toWHex()}) [side: put 0xA in iesSubStruct.field20]"
+            "getPointerToDatFileFlag=${arg3.toWHex()}) [side: put 0xA in iesSubStruct.field20]",
         )
       }
       0x05 -> {
@@ -1458,7 +1458,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         // getPointerToIesCmd2(callingDat, structNum)->linkedDatParser.iesCmd2Substructs.forEach { it.renderMode = newRenderMode }
         ctx.emit(
           "updateRenderTask_changeNestedDatSubStructs_changeRenderMode(structNum = varBlockOrImm(${structNum.toWHex()}), " +
-            "newRenderMode? = varBlockOrImm(${newRenderMode.toWHex()}))"
+            "newRenderMode? = varBlockOrImm(${newRenderMode.toWHex()}))",
         )
       }
       0x0E -> {
@@ -1493,7 +1493,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateRenderTask_MOBSetupRelated(structNum = varBlockOrImm(${structNum.toWHex()}), varBlockOrImm(${arg1.toWHex()}), " +
-            "varBlockOrImm(${arg2.toWHex()}))"
+            "varBlockOrImm(${arg2.toWHex()}))",
         )
       }
       0x05 -> {
@@ -1502,7 +1502,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateRenderTask_MOB_stopMOB?(structNum = varBlockOrImm(${structNum.toWHex()}), varBlockOrImm(${arg1.toWHex()}), " +
-            "varBlockOrImm(${arg2.toWHex()}))"
+            "varBlockOrImm(${arg2.toWHex()}))",
         )
       }
       0x06 -> {
@@ -1534,7 +1534,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val arg2 = readInt()
         ctx.emit(
           "updateRenderTask(structNum = varBlockOrImm(${structNum.toWHex()}), varBlockOrImm(${arg1.toWHex()}), " +
-            "varBlockOrImm(${arg2.toWHex()}))"
+            "varBlockOrImm(${arg2.toWHex()}))",
         )
       }
       else -> return DatParseState.StopUnrecognizedOpcode
@@ -1573,7 +1573,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         ctx.addCoverage(ptr..(ptr + textInterp.length))
         ctx.emit(
           "native::dialog_pushDialogSelection(index = fetchValue(${getMemoryMode.toWHex()}, ${getMemoryArg.toWHex()})), " +
-            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), ptrToDATFile = ${ptr.toWHex()}) $textInterp"
+            "fetchValue(${getMemoryMode2.toWHex()}, ${getMemoryArg2.toWHex()}), ptrToDATFile = ${ptr.toWHex()}) $textInterp",
         )
       }
       0x0B -> {
@@ -1581,7 +1581,7 @@ class ExtraDatOpcodeParser(private val ctx: DatParsingContext) : DatOpcodeParser
         val getMemoryArg = readInt()
         ctx.emit(
           "native::dialog_prepareDialogResponseSelection(howManyResponses = fetchValue(${getMemoryMode.toWHex()}, " +
-            "${getMemoryArg.toWHex()}))"
+            "${getMemoryArg.toWHex()}))",
         )
       }
       0x0D -> {

@@ -14,20 +14,20 @@ import kmipsx.util.region
 import kmipsx.util.word
 import kmipsx.util.zeroTerminatedString
 
-private const val sgQuestion2Title = "qes2_title"
-private const val sgQuestion3Title = "qes3_title"
-private const val sgRinDat = "sg_rin.dat"
-private const val sgRanDat = "sg_ran.dat"
-private const val sgPslDat = "sg_psl.dat"
-private const val sgZinDat = "sg_zin.dat"
-private const val sgEliDat = "sg_eli.dat"
-private const val sgMllDat = "sg_mll.dat"
-private const val sgGilDat = "sg_gil.dat"
-private const val sgKskDat = "sg_ksk.dat"
-private const val sgKiaDat = "sg_kia.dat"
-private const val sgNerDat = "sg_ner.dat"
-private const val sgTamDat = "sg_tam.dat"
-private const val sgEmiDat = "sg_emi.dat"
+private val sgQuestion2Title = "qes2_title"
+private val sgQuestion3Title = "qes3_title"
+private val sgRinDat = "sg_rin.dat"
+private val sgRanDat = "sg_ran.dat"
+private val sgPslDat = "sg_psl.dat"
+private val sgZinDat = "sg_zin.dat"
+private val sgEliDat = "sg_eli.dat"
+private val sgMllDat = "sg_mll.dat"
+private val sgGilDat = "sg_gil.dat"
+private val sgKskDat = "sg_ksk.dat"
+private val sgKiaDat = "sg_kia.dat"
+private val sgNerDat = "sg_ner.dat"
+private val sgTamDat = "sg_tam.dat"
+private val sgEmiDat = "sg_emi.dat"
 
 internal fun Assembler.includeSgVars(vars: PatchVars) {
   vars.sSgQuestion2Title = zeroTerminatedString(sgQuestion2Title)
@@ -50,20 +50,85 @@ internal fun Assembler.includeSgVars(vars: PatchVars) {
   // begin of SG offset table
   align16()
   vars.dSgOffsetTable = virtualPc
-  // sg01_a; sg02_a; sg03_a; sg04_a (often unused)
-  float(0f); float(0f); float(0f); float(0f) // fallback table (failed to resolve dat filename)
-  float(10f); float(-25f); float(-10f); float(0f) // 1: Rin, sg_rin.dat table
-  float(-15f); float(-8f); float(-30f); float(0f) // 2: Rani, sg_ran.dat table
-  float(-3f); float(-25f); float(-25f); float(0f) // 3: Passionlip, sg_psl.dat table
-  float(-3f); float(-10f); float(-18f); float(0f) // 4: Jinako Crigiri, sg_zin.dat table
-  float(-3f); float(0f); float(-2f); float(0f) // 5: Elizabeth, sg_eli.dat table
-  float(-24f); float(-15f); float(-10f); float(0f) // 6: Meltlilith, sg_mll.dat table
-  float(-7f); float(-7f); float(-3f); float(0f) // 7: Gilgamesh, sg_gil.dat table
-  float(0f); float(-22f); float(-20f); float(0f) // 8: BB, sg_ksk.dat table
-  float(0f); float(-10f); float(-5f); float(-12f) // 9: Kiara Sessyoin, sg_kia.dat table
-  float(-10f); float(7f); float(-22f); float(0f) // 10: Nero, sg_ner.dat table
-  float(-17f); float(-27f); float(-20f); float(0f) // 11: Tamamo, sg_tam.dat table
-  float(-2f); float(-10f); float(-12f); float(0f) // 12: Archer, sg_emi.dat table
+  // Order: sg01_a; sg02_a; sg03_a; sg04_a (often unused)
+
+  // fallback table (failed to resolve dat filename)
+  float(0f)
+  float(0f)
+  float(0f)
+  float(0f)
+
+  // 1: Rin, sg_rin.dat table
+  float(10f)
+  float(-25f)
+  float(-10f)
+  float(0f)
+
+  // 2: Rani, sg_ran.dat table
+  float(-15f)
+  float(-8f)
+  float(-30f)
+  float(0f)
+
+  // 3: Passionlip, sg_psl.dat table
+  float(-3f)
+  float(-25f)
+  float(-25f)
+  float(0f)
+
+  // 4: Jinako Crigiri, sg_zin.dat table
+  float(-3f)
+  float(-10f)
+  float(-18f)
+  float(0f)
+
+  // 5: Elizabeth, sg_eli.dat table
+  float(-3f)
+  float(0f)
+  float(-2f)
+  float(0f)
+
+  // 6: Meltlilith, sg_mll.dat table
+  float(-24f)
+  float(-15f)
+  float(-10f)
+  float(0f)
+
+  // 7: Gilgamesh, sg_gil.dat table
+  float(-7f)
+  float(-7f)
+  float(-3f)
+  float(0f)
+
+  // 8: BB, sg_ksk.dat table
+  float(0f)
+  float(-22f)
+  float(-20f)
+  float(0f)
+
+  // 9: Kiara Sessyoin, sg_kia.dat table
+  float(0f)
+  float(-10f)
+  float(-5f)
+  float(-12f)
+
+  // 10: Nero, sg_ner.dat table
+  float(-10f)
+  float(7f)
+  float(-22f)
+  float(0f)
+
+  // 11: Tamamo, sg_tam.dat table
+  float(-17f)
+  float(-27f)
+  float(-20f)
+  float(0f)
+
+  // 12: Archer, sg_emi.dat table
+  float(-2f)
+  float(-10f)
+  float(-12f)
+  float(0f)
 }
 
 internal fun Assembler.includeExtSgPatch(funcs: PatchFuncs, vars: PatchVars, compileResult: CompileResult) {

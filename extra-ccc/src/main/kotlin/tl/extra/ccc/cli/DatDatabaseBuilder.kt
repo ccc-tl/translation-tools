@@ -52,7 +52,7 @@ class DatDatabaseBuilder(
         outName = pathWithoutExt,
         parseEventFunctions = relPath.contains("field_new"),
         findAllFunctionsMode = if (aggressive) FindAllFunctionsMode.AGGRESSIVE else FindAllFunctionsMode.NONE,
-        aggressive = aggressive
+        aggressive = aggressive,
       )
       coverage = datFile.calculateCoverage()
       datFile.writeHtml()
@@ -61,7 +61,7 @@ class DatDatabaseBuilder(
     }
     index.append(
       "<tr><td>$relPath</td> <td><a href=$dasmPath>Disassembly</a></td> <td><a href=$htmlPath>Coverage report</a></td> " +
-        "<td>Coverage: ${if (coverage < 0) "parse error" else "%.03f".format(Locale.US, coverage) + "%"}</td><tr>\n"
+        "<td>Coverage: ${if (coverage < 0) "parse error" else "%.03f".format(Locale.US, coverage) + "%"}</td><tr>\n",
     )
     println()
   }

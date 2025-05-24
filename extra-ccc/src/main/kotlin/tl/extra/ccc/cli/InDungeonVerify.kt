@@ -19,7 +19,7 @@ class InDungeonVerify(
     translationDir.child("script-japanese.txt"),
     stripNewLine = false,
     replaceLiteralNewLine = false,
-    failOnLiteralNewLine = true
+    failOnLiteralNewLine = true,
   )
 
   fun process() {

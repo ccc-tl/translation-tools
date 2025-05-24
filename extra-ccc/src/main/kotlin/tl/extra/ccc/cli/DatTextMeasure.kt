@@ -27,7 +27,7 @@ class DatTextMeasure(
   private val translation = CccTranslation(
     translationDir.child("script-japanese.txt"),
     stripNewLine = true,
-    stripJpAndNotesNewLine = false
+    stripJpAndNotesNewLine = false,
   )
   private val textMeasure = TextMeasure(7, warningCollector::warn)
 
@@ -96,7 +96,7 @@ class DatTextMeasure(
         11693, 13037, 15762, 20029, 20046, 22718, 22719,
         23864, 23866, 23867, 23878, 23883, 23886, 23889, 23889, 23893, 23897, 23900, 23902, 23904, 23906, 23908, 23910,
         23959, 23965, 23968, 23972, 23974, 23975, 23977, 23978,
-        27401, 27402, 27438, 27610
+        27401, 27402, 27438, 27610,
       ).associateWith { true } +
       mapOf(15297 to false, 15389 to false)
 
@@ -189,7 +189,7 @@ class DatTextMeasure(
     val maxWidth: Int,
     val narration: Boolean,
     val lastLine: Boolean,
-    val line: String
+    val line: String,
   ) {
     override fun toString(): String {
       return "Too long line: index $offset: width $lineWidth > $maxWidth (narration=$narration, lastLine=$lastLine): $line"

@@ -16,11 +16,11 @@ fun main(args: Array<String>) {
   println("Done")
 }
 
-@Suppress("UnstableApiUsage")
 /**
  * Verify if two directories content is the same
  * IMPORTANT: This will ignore any extra files that only exist in in2
  */
+@Suppress("UnstableApiUsage")
 class VerifyDirContents(dir1: File, dir2: File, exitOnError: Boolean = false, verbose: Boolean = true) {
   init {
     if (!dir1.exists()) {

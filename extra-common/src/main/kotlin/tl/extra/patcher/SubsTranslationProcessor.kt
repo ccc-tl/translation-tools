@@ -45,7 +45,7 @@ class SubsTranslationProcessor(
             skipMode = it.skipMode,
             displayMode = it.displayMode,
             dispatchMode = it.dispatchMode,
-            parts = it.parts
+            parts = it.parts,
           )
         } else {
           warn("${it.audioPath} has subs but the game ID is not set")
@@ -175,14 +175,14 @@ class SubsTranslationProcessor(
           SubPartConfig(
             frames = partConfig[0].toInt(),
             xOverride = partConfig.elementAtOrNull(1)?.toInt(),
-            xOffset = partConfig.elementAtOrNull(2)?.toInt() ?: 0
+            xOffset = partConfig.elementAtOrNull(2)?.toInt() ?: 0,
           )
         }
       SubConfig(
         skipMode = header[0].toInt(),
         displayMode = header[1].toInt(),
         dispatchMode = header.elementAtOrNull(2)?.toInt() ?: 1,
-        parts = parts
+        parts = parts,
       )
     } catch (e: Exception) {
       warn("Subtitles: '$audioPath' config can't be parsed. Exception occurred: ${e.javaClass.simpleName}: ${e.message}")
@@ -215,7 +215,7 @@ const subtitle subs[] = {
 };
 
 const u8 remappedTextData[] = ${remappedTextData.joinToString(separator = ", ", prefix = "{", postfix = "}") { "0x${it.toWHex()}" }};
-""".trimStart()
+""".trimStart(),
     )
   }
 
@@ -254,7 +254,8 @@ const subtitle_part sub${subIndex}_parts[] = {
     .mapIndexed { partIdx, part -> partIdx to part }
     .joinToString(separator = ",\n\t") { (partIdx, part) ->
       """{(const char*)partdata_${subIdx}_$partIdx,
-                | ${part.x}, ${part.frames}}""".trimMargin().replace("\n", "")
+                | ${part.x}, ${part.frames}}
+      """.trimMargin().replace("\n", "")
     }
 }
 

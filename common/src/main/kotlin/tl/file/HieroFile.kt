@@ -33,9 +33,15 @@ class HieroFile(fntFile: File, pngFile: File) {
         "char" -> {
           chars.add(
             Char(
-              partAsInt(1), partAsInt(2), partAsInt(3), partAsInt(4),
-              partAsInt(5), partAsInt(6), partAsInt(7), partAsInt(8)
-            )
+              partAsInt(1),
+              partAsInt(2),
+              partAsInt(3),
+              partAsInt(4),
+              partAsInt(5),
+              partAsInt(6),
+              partAsInt(7),
+              partAsInt(8),
+            ),
           )
         }
         "kerning" -> {

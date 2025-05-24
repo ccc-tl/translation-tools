@@ -18,7 +18,7 @@ class ColorCodeChecker(
   private val translation = CccTranslation(
     translationDir.child("script-japanese.txt"),
     stripNewLine = true,
-    stripJpAndNotesNewLine = false
+    stripJpAndNotesNewLine = false,
   )
 
   fun process() {

@@ -13,7 +13,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(1, 0x9, -95f, 148f, 3f),
       PoemUpdate.Light(2, 0x9, -160f, 180f, 3f),
       PoemUpdate.Light(3, 0x9, -125f, 165f, 14f),
-      PoemUpdate.Light(4, 0x9, -125f, 145f, 25f)
+      PoemUpdate.Light(4, 0x9, -125f, 145f, 25f),
     ),
     "poem_01" to listOf(
       // s1
@@ -45,7 +45,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(6, 0x14, -120f, 134f, -17f),
       PoemUpdate.Light(7, 0x14, -150f, 177f, -8f),
 
-      PoemUpdate.Light(8, 0x14, -180f, 205f, 11f)
+      PoemUpdate.Light(8, 0x14, -180f, 205f, 11f),
     ),
     "poem_02" to listOf(
       // s1
@@ -84,7 +84,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(3, 0x14, -174f, 205f, -5f),
       PoemUpdate.Light(4, 0x14, -180f, 210f, -5f),
       PoemUpdate.Light(5, 0x14, -176f, 155f, 10f),
-      PoemUpdate.Light(6, 0x14, -185f, 207f, 25f)
+      PoemUpdate.Light(6, 0x14, -185f, 207f, 25f),
     ),
     "poem_03" to listOf(
       // s1
@@ -122,7 +122,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(6, 0x19, -90f, 125f, -30f),
       PoemUpdate.Light(7, 0x19, -160f, 210f, -5f),
       PoemUpdate.Light(8, 0x19, -185f, 235f, -10f),
-      PoemUpdate.Light(9, 0x19, -130f, 155f, 25f)
+      PoemUpdate.Light(9, 0x19, -130f, 155f, 25f),
     ),
     "poem_04" to listOf(
       // s1
@@ -153,11 +153,11 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       // swap ruby to be linked to appearance of s2l4 instead of s2l5
       PoemUpdate.SwapBytes(
         5, 0x904, 0x34,
-        6, 0x96C, 6 * 0x34
+        6, 0x96C, 6 * 0x34,
       ),
       PoemUpdate.WriteMobInt(5, 0xA8, 6),
       PoemUpdate.WriteMobInt(6, 0xA8, 1),
-      PoemUpdate.WriteMobInt(6, 0x96C + 0x28, -1) // set color1 to fully visible
+      PoemUpdate.WriteMobInt(6, 0x96C + 0x28, -1), // set color1 to fully visible
     ),
     "poem_05" to listOf(
       // s1
@@ -195,7 +195,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(6, 0x14, -125f, 155f, 1f),
 
       PoemUpdate.Light(7, 0x14, -120f, 130f, 12f),
-      PoemUpdate.Light(8, 0x14, -115f, 135f, 22f)
+      PoemUpdate.Light(8, 0x14, -115f, 135f, 22f),
     ),
     "poem_06" to listOf(
       // s1
@@ -243,7 +243,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(10, 0x1E, -135f, 185f, -17f),
       PoemUpdate.Light(11, 0x1E, -170f, 205f, -15f),
       PoemUpdate.Light(12, 0x1E, -155f, 180f, 5f),
-      PoemUpdate.Light(13, 0x1E, -95f, 130f, 15f)
+      PoemUpdate.Light(13, 0x1E, -95f, 130f, 15f),
     ),
     "poem_07" to listOf(
       // s1
@@ -255,7 +255,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
 
       // s1 lights
       PoemUpdate.Light(0, 0xD, -95f, 125f, -14f),
-      PoemUpdate.Light(1, 0x5, -105f, 138f, 0f)
+      PoemUpdate.Light(1, 0x5, -105f, 138f, 0f),
     ),
     "poem_08" to listOf(
       // s1
@@ -267,7 +267,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
 
       // s1 lights
       PoemUpdate.Light(0, 0xD, -175f, 190f, -14f),
-      PoemUpdate.Light(1, 0x5, -115f, 135f, 0f)
+      PoemUpdate.Light(1, 0x5, -115f, 135f, 0f),
     ),
     "poem_ex" to listOf(
       // s1
@@ -300,7 +300,7 @@ fun getPoemUpdates(): Map<String, List<PoemUpdate>> {
       PoemUpdate.Light(0, 1, -90f, 180f, -27f, 6 + 24),
       PoemUpdate.Light(0, 1, -145f, 240f, -13f, 6 + 28),
       PoemUpdate.Light(0, 1, -145f, 230f, 21f, 6 + 32),
-      PoemUpdate.Light(0, 1, -125f, 192f, 28f, 6 + 36)
-    )
+      PoemUpdate.Light(0, 1, -125f, 192f, 28f, 6 + 36),
+    ),
   )
 }

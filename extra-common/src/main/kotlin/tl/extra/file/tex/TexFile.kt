@@ -40,7 +40,7 @@ class TexFile(
       width = readShort().toInt()
       height = readShort().toInt()
       val unkWidth = readShort().toInt() // (?) somehow related to width
-      val unkHeight = readShort()
+      val unkHeight = readShort() // always zero in CCC
 
       val texByteSize = readInt()
       val texOffset = readInt()
@@ -313,7 +313,7 @@ class TexFile(
           }
           println(
             "CCT is present. CCT chunks: $cctChunkCount. CCT unique chunks: $cctUniqueChunkCount. " +
-              "CCT actual chunks: ${cctList.size}. CCT chunk size: $cctChunkSize"
+              "CCT actual chunks: ${cctList.size}. CCT chunk size: $cctChunkSize",
           )
           Cct(cctList, cctChunkSize)
         }

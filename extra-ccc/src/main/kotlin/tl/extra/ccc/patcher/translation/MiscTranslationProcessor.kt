@@ -9,7 +9,7 @@ class MiscTranslationProcessor(
   outDir: File,
   unitDir: File,
   textMeasure: TextMeasure,
-  warn: (String) -> Unit
+  warn: (String) -> Unit,
 ) : PatcherBasedProcessor(pakExtract, outDir, unitDir) {
   init {
     patchTextBinFile("interface/item/msg.bin", 0)

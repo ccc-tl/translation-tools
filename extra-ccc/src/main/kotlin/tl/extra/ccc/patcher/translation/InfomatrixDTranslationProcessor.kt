@@ -9,7 +9,7 @@ class InfomatrixDTranslationProcessor(
   outDir: File,
   unitDir: File,
   textMeasure: TextMeasure,
-  warn: (String) -> Unit
+  warn: (String) -> Unit,
 ) : PatcherBasedProcessor(pakExtract, outDir, unitDir) {
   init {
     patchTextBinFile("interface/infomatrixex/msg.bin", 0)

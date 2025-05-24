@@ -12,7 +12,7 @@ import tl.extra.file.tex.TxbFile
 import java.io.File
 
 private val errorMessages = mutableListOf<String>()
-private const val textureCccUnpack = true
+private val textureCccUnpack = true
 
 private var texCount = 0
 
