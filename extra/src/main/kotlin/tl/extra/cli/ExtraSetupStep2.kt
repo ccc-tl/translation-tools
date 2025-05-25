@@ -2,6 +2,7 @@ package tl.extra.cli
 
 import kio.util.child
 import kmipsx.elf.ElfFile
+import tl.extra.extraJpCpkUnpack
 import tl.extra.extraJpPakUnpack
 import tl.extra.extraToolkit
 import tl.extra.extraUnpack
@@ -9,7 +10,13 @@ import tl.extra.fateOutput
 import java.io.File
 
 fun main() {
-  ExtraSetupStep2(fateOutput, extraToolkit, extraUnpack, extraJpPakUnpack)
+  ExtraSetupStep2(
+    inputDir = fateOutput,
+    toolkitDir = extraToolkit,
+    extractDir = extraUnpack,
+    extractJpCpkDir = extraJpCpkUnpack,
+    extractJpPakDir = extraJpPakUnpack
+  )
     .execute()
   println("Done")
 }
@@ -18,6 +25,7 @@ class ExtraSetupStep2(
   private val inputDir: File,
   toolkitDir: File,
   private val extractDir: File,
+  private val extractJpCpkDir: File,
   private val extractJpPakDir: File,
 ) {
   private val srcDir = toolkitDir.child("src").also { it.mkdirs() }
@@ -75,7 +83,7 @@ class ExtraSetupStep2(
     println("Preparing translations...")
     ExtraMainScriptDumper(srcDir.child("translation/dat"), extractDir, extractJpPakDir, applyEntryFixes = true)
     ExtraMiscScriptDumper(srcDir.child("translation/misc"), extractDir, extractJpPakDir)
-    ExtraDayScriptDumper(srcDir.child("translation/day"), extractDir, extractJpPakDir)
+    ExtraDayScriptDumper(srcDir.child("translation/day"), extractDir, extractJpCpkDir)
     listOf("dat", "misc", "day").forEach { unit ->
       srcDir.child("translation/$unit/script-translation.txt").copyTo(srcDir.child("translation/$unit/script-translation-orig.txt"))
     }

@@ -13,7 +13,15 @@ import tl.file.CpkFile
 import java.io.File
 
 fun main() {
-  ExtraSetupStep1(fateOutput, extraIsoUnpack, extraCpkUnpack, extraPakUnpack, extraUnpack, extraJpCpkUnpack, extraJpPakUnpack)
+  ExtraSetupStep1(
+    inputDir = fateOutput,
+    extractIsoDir = extraIsoUnpack,
+    extractCpkDir = extraCpkUnpack,
+    extractPakDir = extraPakUnpack,
+    extractDir = extraUnpack,
+    extractJpCpkDir = extraJpCpkUnpack,
+    extractJpPakDir = extraJpPakUnpack
+  )
     .execute()
   println("Done")
 }
